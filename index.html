@@ -636,13 +636,13 @@ function renderID(){
     const score=colHits*3 + (idf.size?(b.size===idf.size?2:0):0) + (idf.hab&&b.hab.includes(idf.hab)?2:0);
     return {b,score,colHits};
   }).filter(x=>!idf.col.size||x.colHits>0)
-    .sort((a,z)=>z.score-a.score || (a.b.col.length-z.b.col.length) || a.b.n.localeCompare(z.b.n));
-  const maxScore=list.length?list[0].score:0;
+    .sort((a,z)=>a.b.n.localeCompare(z.b.n));
+  const maxScore=list.reduce((m,x)=>Math.max(m,x.score),0);
   v.innerHTML=`<div class="filters">
     <div class="group"><span class="label">How big? (beak to tail)</span><div class="row">${chips("size",[[1,"Tiny <5\""],[2,"Sparrow 5–7\""],[3,"Robin 8–11\""],[4,"Crow 12–20\""],[5,"Larger 20\"+"]],idf.size)}</div></div>
     <div class="group"><span class="label">Where was it?</span><div class="row">${chips("hab",Object.entries(HAB_TXT),idf.hab)}</div></div>
     <div class="group"><span class="label">Colors you noticed</span><div class="row">${chips("col",Object.keys(COLORS).map(k=>[k,k[0].toUpperCase()+k.slice(1),COLORS[k]]))}</div></div>
-    <div class="row" style="justify-content:space-between"><span class="note">${list.length} possible bird${list.length===1?"":"s"}${list.length&&maxScore?", best matches first":""}</span><button class="chip" id="clr">Clear</button></div>
+    <div class="row" style="justify-content:space-between"><span class="note">${list.length} possible bird${list.length===1?"":"s"}${list.length&&maxScore?", A to Z, closest matches marked":", A to Z"}</span><button class="chip" id="clr">Clear</button></div>
   </div>
   <div id="pick"></div>
   <div class="results" style="margin-top:12px">${list.map(({b,score})=>`<button class="result" data-n="${b.n}">
