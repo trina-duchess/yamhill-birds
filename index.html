@@ -65,6 +65,12 @@ button:focus-visible,a:focus-visible,.chip:focus-visible{outline:3px solid var(-
 .detail{display:flex;flex-direction:column;gap:10px}
 .detail p{margin:0;max-width:62ch}
 .detail h3{margin:0 0 2px;font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sounds{display:flex;flex-direction:column;gap:8px}
+.sound{display:flex;flex-direction:column;gap:2px}
+.sound .st{font-size:.82rem;font-weight:600;color:var(--fg)}
+.sound audio{width:100%;height:40px}
+.sound .sc{font-size:.72rem;color:var(--muted)}
+.hint-toggle{align-self:flex-start}
 .links{display:flex;flex-wrap:wrap;gap:8px}
 .links a{color:var(--accent);font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:.9rem}
 .links a:hover{border-color:var(--accent)}
@@ -117,7 +123,7 @@ button:focus-visible,a:focus-visible,.chip:focus-visible{outline:3px solid var(-
   <section id="view-quiz" hidden></section>
   <section id="view-id" hidden></section>
 
-  <p class="note">Photos come from iNaturalist and are credited to each photographer. A drawn color plate shows if a photo can't load. Open a bird's links for more photos and recordings.</p>
+  <p class="note">Photos come from iNaturalist and are credited to each photographer. A drawn color plate shows if a photo can't load. Recordings come from xeno-canto and are credited to each recordist.</p>
 </div>
 
 <script>
@@ -490,6 +496,19 @@ function hydrate(root){
     });
   });
 }
+// ---------- songs (xeno-canto, list built by the "Update bird songs" workflow) ----------
+let SONGS = {};
+fetch("songs.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
+  if(!j||!j.birds) return; SONGS=j.birds;
+  renderCards(); if(!qAnswered) renderQuiz();
+}).catch(()=>{});
+const rec = (b,k) => SONGS[b.s] && SONGS[b.s][k];
+function soundsHTML(b, labelOnly){
+  const parts=[["song","Song"],["call","Call"]].map(([k,t])=>{const r=rec(b,k); if(!r) return "";
+    return `<div class="sound"><span class="st">${t}</span><audio controls preload="none" src="${r.file}"></audio>
+      <span class="sc">${labelOnly?"":`${r.who}, ${r.where} · `}xeno-canto XC${r.id}</span></div>`}).join("");
+  return parts?`<div class="sounds">${parts}</div>`:"";
+}
 const sizebar = n => `<span class="sizebar" title="${SIZE_TXT[n]}" aria-hidden="true">${[1,2,3,4,5].map(i=>`<i class="${i===n?'on':''}" style="height:${4+i*3}px"></i>`).join("")}</span>`;
 const slug = n => n.replace(/'/g,"").replace(/ /g,"_");
 function detailHTML(b){
@@ -497,6 +516,7 @@ function detailHTML(b){
     <div><p class="name">${b.n}</p><p class="sci">${b.s}</p></div>
     <div><h3>Field marks</h3><p>${b.marks}</p></div>
     <div><h3>Listen for</h3><p>${b.sound}</p></div>
+    ${soundsHTML(b)}
     <div class="links">
       <a href="https://www.allaboutbirds.org/guide/${slug(b.n)}" target="_blank" rel="noopener">Photos &amp; sounds ↗</a>
       <a href="https://xeno-canto.org/explore?query=${encodeURIComponent(b.n)}" target="_blank" rel="noopener">Recordings ↗</a>
@@ -579,6 +599,8 @@ function renderQuiz(){
   const b=qList[qi];
   let prompt;
   if(qMode==="look") prompt=`<div class="plate">${pic(b)}</div>`;
+  else if(qMode==="listen" && (rec(b,"song")||rec(b,"call"))) prompt=`<div class="card-body" style="padding-bottom:0"><span class="label">Listen</span>${soundsHTML(b,true)}
+      <button class="chip hint-toggle" id="hintBtn">Show written hint</button><p class="clue" id="hintTxt" hidden>${b.sound}</p></div>`;
   else prompt=`<div class="card-body" style="padding-bottom:0"><span class="label">${qMode==="listen"?"You hear":"You see"}</span><p class="clue">${qMode==="listen"?b.sound:b.marks.replace(new RegExp(b.n.split(" ").pop(),"gi"),"___")}</p></div>`;
   v.innerHTML=`${modes}
     <div class="card" style="margin-top:12px">${prompt}
@@ -589,6 +611,7 @@ function renderQuiz(){
       </div></div>
     <div class="meta"><span>Question ${qi+1} of ${qList.length}</span><span>Score ${qScore}</span></div>`;
   bindModes(v); hydrate(v);
+  const hb=v.querySelector("#hintBtn"); if(hb) hb.onclick=()=>{v.querySelector("#hintTxt").hidden=false; hb.hidden=true};
   v.querySelectorAll(".choice").forEach(btn=>btn.onclick=()=>{
     if(qAnswered) return; qAnswered=true;
     const pick=qChoices[+btn.dataset.i]; const ok=pick===b; if(ok) qScore++;
@@ -640,6 +663,8 @@ function renderID(){
     p.scrollIntoView({behavior:"smooth",block:"start"});
   });
 }
+
+document.addEventListener("play",e=>{document.querySelectorAll("audio").forEach(a=>{if(a!==e.target)a.pause()})},true);
 
 // ---------- tabs ----------
 const views={cards:"view-cards",quiz:"view-quiz",id:"view-id"};

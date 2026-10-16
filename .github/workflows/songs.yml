@@ -1,0 +1,23 @@
+name: Update bird songs
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 13 1 * *"   # monthly
+permissions:
+  contents: write
+jobs:
+  songs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/fetch-songs.mjs
+        env:
+          XC_KEY: ${{ secrets.XC_KEY }}
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add songs.json
+          git diff --cached --quiet || (git commit -m "Update bird songs" && git push)
