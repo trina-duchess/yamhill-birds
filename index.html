@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Birds">
+<style>body{margin:0}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Yamhill Bird Trainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: single field-guide column; a painted "plate" is the hero of every card, controls sit below like a field notebook */
+:root{
+  --bg:#eef2ec; --surface:#f8faf6; --fg:#1c2923; --muted:#5b6b62; --line:#cbd5cc;
+  --accent:#2f6b55; --accent-fg:#ffffff; --ochre:#b9822a;
+  --plate:#e3e8de; --plate-line:#c3cdbf;
+  --good:#2f7a45; --good-bg:#dcefe0; --bad:#a33b2a; --bad-bg:#f6dfda;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121a17; --surface:#1a2420; --fg:#e2eae4; --muted:#9db0a5; --line:#2d3b35;
+  --accent:#7cc2a2; --accent-fg:#0f1714; --ochre:#e0b25c;
+  --plate:#cfd6ca; --plate-line:#9fab9c;
+  --good:#8fd7a4; --good-bg:#1f3a2a; --bad:#f0a394; --bad-bg:#3d2420; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121a17; --surface:#1a2420; --fg:#e2eae4; --muted:#9db0a5; --line:#2d3b35;
+  --accent:#7cc2a2; --accent-fg:#0f1714; --ochre:#e0b25c;
+  --plate:#cfd6ca; --plate-line:#9fab9c;
+  --good:#8fd7a4; --good-bg:#1f3a2a; --bad:#f0a394; --bad-bg:#3d2420; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 48px}
+.wrap{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+h1{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1.1;margin:0;text-wrap:balance}
+.season-line{color:var(--muted);font-size:.95rem;margin:0}
+.season-line b{color:var(--ochre);font-weight:600}
+.tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.tabs button{flex:1;border:0;background:transparent;color:var(--muted);font:600 .95rem var(--body);padding:9px 6px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-fg)}
+button:focus-visible,a:focus-visible,.chip:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--fg);font:500 .88rem var(--body);padding:6px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-fg)}
+.swatch{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.3);display:inline-block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.plate{background:var(--plate);border-bottom:1px solid var(--plate-line);display:flex;justify-content:center;padding:10px 12px 8px;position:relative}
+.pic{display:block;width:100%;max-width:420px}
+.pic img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:var(--plate-line)}
+.pic .credit{display:block;font-size:.66rem;color:#4d5a50;text-align:right;padding:3px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.result .mini .pic img{aspect-ratio:1;border-radius:8px}
+.result .mini .credit{display:none}
+.plate svg{width:100%;max-width:340px;height:auto;display:block}
+.plate .tag{position:absolute;left:18px;top:16px;z-index:1;background:rgba(255,255,255,.85);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#4d5a50}
+.card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:6px}
+.fact{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:.82rem;padding:3px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--fg)}
+.sizebar{display:flex;gap:3px;align-items:flex-end}
+.sizebar i{display:block;width:10px;border-radius:2px;background:var(--line)}
+.sizebar i.on{background:var(--ochre)}
+.name{font-family:var(--display);font-size:1.6rem;line-height:1.15;margin:0}
+.sci{font-style:italic;color:var(--muted);margin:0;font-size:.92rem}
+.detail{display:flex;flex-direction:column;gap:10px}
+.detail p{margin:0;max-width:62ch}
+.detail h3{margin:0 0 2px;font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{color:var(--accent);font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:.9rem}
+.links a:hover{border-color:var(--accent)}
+.btn{border:0;border-radius:12px;padding:12px 16px;font:600 1rem var(--body);cursor:pointer;background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btns{display:flex;gap:8px}
+.btns .btn{flex:1}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.choices{grid-template-columns:1fr}}
+.choice{text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:12px;padding:12px 14px;font:600 .98rem var(--body);cursor:pointer}
+.choice.right{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.choice.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.choice:disabled{cursor:default}
+.clue{font-size:1.08rem;margin:0;max-width:60ch}
+.clue-q{font-family:var(--display);font-size:1.3rem;margin:0}
+.results{display:flex;flex-direction:column;gap:8px}
+.result{display:grid;grid-template-columns:88px 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 12px 6px 6px;cursor:pointer;text-align:left;color:var(--fg);font:inherit;width:100%}
+.result .mini{background:var(--plate);border-radius:8px;display:flex}
+.result .mini svg{width:88px;height:auto}
+.result .rn{font-weight:600;min-width:0}
+.result .rs{color:var(--muted);font-size:.84rem}
+.result .score{font-family:var(--mono);font-size:.75rem;color:var(--ochre)}
+.filters{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.filters .group{display:flex;flex-direction:column;gap:6px}
+.note{color:var(--muted);font-size:.85rem;margin:0}
+.toggle{display:flex;align-items:center;gap:8px;font-size:.92rem;color:var(--fg)}
+.toggle input{accent-color:var(--accent);width:18px;height:18px}
+.done{text-align:center;padding:24px 18px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.big{font-family:var(--display);font-size:2.6rem;margin:0;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: no-preference){.card{animation:rise .25s ease-out}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
+</style>
+
+</head><body>
+<div class="wrap">
+  <header>
+    <h1>Yamhill Bird Trainer</h1>
+    <p class="season-line" id="seasonLine">Common birds of Yamhill County and the Willamette Valley.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-cards" aria-selected="true">Flashcards</button>
+    <button role="tab" id="tab-quiz" aria-selected="false">Quiz</button>
+    <button role="tab" id="tab-id" aria-selected="false">Identify</button>
+  </div>
+
+  <label class="toggle"><input type="checkbox" id="inSeason" checked> Only birds here this month</label>
+
+  <section id="view-cards"></section>
+  <section id="view-quiz" hidden></section>
+  <section id="view-id" hidden></section>
+
+  <p class="note">Photos come from iNaturalist and are credited to each photographer. A drawn color plate shows if a photo can't load. Open a bird's links for more photos and recordings.</p>
+</div>
+
+<script>
+// ---------- species data ----------
+// c = plate colors; f = marks drawn on the plate
+const B = [
+ {n:"American Robin",s:"Turdus migratorius",shape:"song",size:3,season:"year",hab:["yard","field","woods"],col:["orange","gray","black"],
+  marks:"Brick-orange breast, dark gray head, broken white eye ring, yellow bill. Runs, stops and tilts its head on lawns.",
+  sound:"Caroling phrases, 'cheerily, cheer-up, cheerio'. Often the first bird singing before dawn.",
+  c:{crown:"#2b2b2b",face:"#3a3a3a",throat:"#e8e4dc",breast:"#c4562a",belly:"#d0663a",back:"#5d5850",wing:"#504b45",tail:"#2e2e2e",bill:"#e3b23c"},f:{streaks:"throat"}},
+ {n:"Song Sparrow",s:"Melospiza melodia",shape:"song",size:2,season:"year",hab:["yard","water"],col:["brown","white"],
+  marks:"Heavy brown streaks that merge into a central breast spot. Pumps its long rounded tail in flight.",
+  sound:"Two or three clear notes then a jumbled trill: 'maids, maids, maids, put on your tea-kettle-ettle-ettle'.",
+  c:{crown:"#7a4a32",face:"#a29c90",throat:"#ece7dc",breast:"#e6ddcf",belly:"#ece7dc",back:"#7a5a44",wing:"#8a5a3a",tail:"#7a5a44",bill:"#8a7a6a"},f:{streaks:true}},
+ {n:"Spotted Towhee",s:"Pipilo maculatus",shape:"song",size:3,season:"year",hab:["yard","woods"],col:["black","orange","white"],
+  marks:"Black hood and back, rufous sides, white belly, white spots on the wings, red eye. Scratches noisily in leaf litter.",
+  sound:"A dry buzzy trill. Call is a rising, cat-like 'mreee?'.",
+  c:{crown:"#1a1a1a",face:"#1a1a1a",throat:"#1a1a1a",breast:"#1a1a1a",belly:"#c8702e",back:"#1f1f1f",wing:"#1f1f1f",wingbar:"#ffffff",tail:"#1a1a1a",bill:"#222"},f:{eye:"#c0281e",wingspots:true}},
+ {n:"Dark-eyed Junco",s:"Junco hyemalis",shape:"song",size:2,season:"year",hab:["yard","woods"],col:["black","brown","white"],
+  marks:"Black hood, pink bill, brown back, pinkish sides. White outer tail feathers flash when it flies up.",
+  sound:"A musical trill on one pitch. Call is a sharp 'tsick' or 'smack'.",
+  c:{crown:"#2a2a30",face:"#2a2a30",throat:"#2a2a30",breast:"#2a2a30",belly:"#d4b29a",back:"#8a5f45",wing:"#6e6a66",tail:"#3a3a3a",bill:"#ebc7bf"},f:{}},
+ {n:"Black-capped Chickadee",s:"Poecile atricapillus",shape:"song",size:1,season:"year",hab:["yard","woods"],col:["black","white","gray"],
+  marks:"Black cap and bib, white cheeks, buffy sides. Acrobatic, hangs upside down on twigs.",
+  sound:"Sweet two-note 'fee-bee'. Call is the namesake 'chick-a-dee-dee-dee'.",
+  c:{crown:"#111",face:"#f5f5f2",throat:"#111",breast:"#f2efe6",belly:"#e2d2b4",back:"#8f8f8c",wing:"#6a6a6a",wingbar:"#e6e6e2",tail:"#6a6a6a",bill:"#111"},f:{}},
+ {n:"Bushtit",s:"Psaltriparus minimus",shape:"song",size:1,season:"year",hab:["yard","woods"],col:["gray","brown"],
+  marks:"Tiny plain gray-brown puffball with a long tail and stubby bill. Travels in busy flocks of 10 to 40.",
+  sound:"Constant soft twittering 'tsit' notes as the flock moves through shrubs.",
+  c:{crown:"#8a7f6a",face:"#8c826e",throat:"#b8b2a6",breast:"#bdb7aa",belly:"#c6c0b4",back:"#8f8f86",wing:"#7a7a72",tail:"#7c7a70",bill:"#333"},f:{longtail:true}},
+ {n:"Bewick's Wren",s:"Thryomanes bewickii",shape:"song",size:2,season:"year",hab:["yard","woods"],col:["brown","white","gray"],
+  marks:"Bold white eyebrow, plain brown back, clean grayish-white underparts. Long tail flicked side to side.",
+  sound:"Varied, bright song: a few buzzy notes then a trill. Scolds with a harsh buzz.",
+  c:{crown:"#6b4c3a",face:"#d8d2c6",throat:"#f2efe8",breast:"#e9e6df",belly:"#ddd8cf",back:"#6b4c3a",wing:"#6b4c3a",tail:"#5a4a40",bill:"#333"},f:{eyebrow:"#ffffff",longtail:true,longbill:true}},
+ {n:"Steller's Jay",s:"Cyanocitta stelleri",shape:"song",size:4,season:"year",hab:["woods","yard"],col:["blue","black"],
+  marks:"Tall black crest and head, deep blue body and wings. Bold and noisy around conifers.",
+  sound:"Harsh 'shook-shook-shook' or 'shack-shack'. Also imitates Red-tailed Hawks.",
+  c:{crown:"#121a2a",face:"#121a2a",throat:"#1d2433",breast:"#2c3e6b",belly:"#2a5aa0",back:"#23324f",wing:"#1f4fa0",tail:"#1e4ea0",bill:"#111"},f:{crest:true}},
+ {n:"California Scrub-Jay",s:"Aphelocoma californica",shape:"song",size:3,season:"year",hab:["yard","woods"],col:["blue","gray","white"],
+  marks:"Blue head, wings and tail, gray-brown back, white throat with a blue necklace. No crest.",
+  sound:"Harsh, rising 'shreeep', often repeated. Loud around oaks and yards.",
+  c:{crown:"#3b6fb5",face:"#4a5568",throat:"#ece9e2",breast:"#c9cbd0",belly:"#d9d6cf",back:"#8a8a84",wing:"#3b6fb5",tail:"#3b6fb5",bill:"#111"},f:{bands:"#3b6fb5"}},
+ {n:"American Crow",s:"Corvus brachyrhynchos",shape:"song",size:4,season:"year",hab:["yard","field"],col:["black"],
+  marks:"All black including bill and legs. Square-ended tail in flight. Often in groups.",
+  sound:"The familiar 'caw-caw'. Also rattles and clicks.",
+  c:{crown:"#141414",face:"#141414",throat:"#141414",breast:"#161616",belly:"#181818",back:"#141414",wing:"#101010",tail:"#121212",bill:"#111"},f:{}},
+ {n:"Northern Flicker",s:"Colaptes auratus",shape:"song",size:4,season:"year",hab:["yard","field","woods"],col:["brown","black","gray","orange"],
+  marks:"Brown barred back, black bib, spotted belly. Salmon-orange underwings and white rump flash in flight. Often on the ground eating ants.",
+  sound:"Loud 'klee-yer' and a long 'wick-wick-wick-wick'. Drums on gutters.",
+  c:{crown:"#8a6a52",face:"#b0aaa0",throat:"#b0aaa0",breast:"#1a1a1a",belly:"#efe3d2",back:"#8a6a50",wing:"#8a6a50",tail:"#2a2a2a",bill:"#333"},f:{spots:"belly",mustache:"#c8392e",longbill:true}},
+ {n:"Downy Woodpecker",s:"Dryobates pubescens",shape:"song",size:2,season:"year",hab:["yard","woods"],col:["black","white"],
+  marks:"Small black-and-white woodpecker with a white stripe down the back and a tiny bill. Males have a red spot on the nape.",
+  sound:"Soft 'pik' call and a descending whinny.",
+  c:{crown:"#111",face:"#f5f5f2",throat:"#f5f5f2",breast:"#f5f5f2",belly:"#f0eee8",back:"#111",wing:"#111",wingbar:"#ffffff",tail:"#111",bill:"#222"},f:{wingspots:true,nape:"#d22b2b"}},
+ {n:"Anna's Hummingbird",s:"Calypte anna",shape:"song",size:1,season:"year",hab:["yard"],col:["green","red","gray"],
+  marks:"Green back; males have an iridescent rose-pink head and throat. Stays all winter at feeders.",
+  sound:"Scratchy, buzzy song from a perch. Males make a loud chirp at the bottom of a dive display.",
+  c:{crown:"#c2185b",face:"#3a5a40",throat:"#d81b60",breast:"#8e9a8a",belly:"#b8bdb4",back:"#3e7a4a",wing:"#3a3a3a",tail:"#3a3a3a",bill:"#111"},f:{hummer:true}},
+ {n:"Red-breasted Nuthatch",s:"Sitta canadensis",shape:"song",size:1,season:"year",hab:["woods","yard"],col:["orange","gray","black","white"],
+  marks:"Blue-gray back, rusty underparts, black eyeline under a white eyebrow. Creeps headfirst down trunks.",
+  sound:"Nasal 'yank-yank', like a tiny tin horn.",
+  c:{crown:"#111",face:"#f2f2ee",throat:"#f2f2ee",breast:"#d88a4a",belly:"#d27a3a",back:"#6e7c8c",wing:"#6e7c8c",tail:"#5e6c7c",bill:"#333"},f:{eyeline:"#111"}},
+ {n:"White-breasted Nuthatch",s:"Sitta carolinensis",shape:"song",size:2,season:"year",hab:["woods","yard"],col:["gray","white","black"],
+  marks:"Blue-gray back, clean white face and breast, black cap. Climbs headfirst down oak trunks.",
+  sound:"Nasal 'yank' calls, often in a quick series.",
+  c:{crown:"#111",face:"#f5f5f2",throat:"#f5f5f2",breast:"#f5f5f2",belly:"#ece9e2",back:"#7d8a98",wing:"#50565f",tail:"#50565f",bill:"#333"},f:{longbill:true}},
+ {n:"House Finch",s:"Haemorhous mexicanus",shape:"song",size:2,season:"year",hab:["yard"],col:["red","brown"],
+  marks:"Males have a red head and breast with brown streaky sides. Females are plain brown and streaked. Common at feeders.",
+  sound:"Long, cheerful warbling jumble that often ends in a down-slurred 'zeeer'.",
+  c:{crown:"#c6283a",face:"#b5363e",throat:"#c6283a",breast:"#c6283a",belly:"#e9e3d8",back:"#7a6658",wing:"#6a5a4e",wingbar:"#d8d0c4",tail:"#6a5a4e",bill:"#8a8078"},f:{streaks:"belly"}},
+ {n:"American Goldfinch",s:"Spinus tristis",shape:"song",size:1,season:"year",hab:["yard","field"],col:["yellow","black","white"],
+  marks:"Summer males are bright yellow with a black cap and black wings. In winter they turn dull olive-brown but keep black wings with white bars.",
+  sound:"Bouncy flight call: 'po-ta-to-chip'.",
+  c:{crown:"#111",face:"#f4d000",throat:"#f4d000",breast:"#f4d000",belly:"#f4d000",back:"#f0c800",wing:"#111",wingbar:"#ffffff",tail:"#111",bill:"#f0a86a"},f:{}},
+ {n:"Lesser Goldfinch",s:"Spinus psaltria",shape:"song",size:1,season:"year",hab:["yard","field"],col:["yellow","green","black"],
+  marks:"Smaller than American Goldfinch. Olive-green back, yellow underparts, black cap and a white wing patch.",
+  sound:"Plaintive, rising 'tee-yee'. Song mixes in imitations of other birds.",
+  c:{crown:"#111",face:"#5a6a1a",throat:"#f0d000",breast:"#f0d000",belly:"#f0d000",back:"#5a6a1a",wing:"#111",wingbar:"#ffffff",tail:"#111",bill:"#555"},f:{}},
+ {n:"European Starling",s:"Sturnus vulgaris",shape:"song",size:3,season:"year",hab:["yard","field"],col:["black"],
+  marks:"Chunky, short-tailed, glossy black. Covered in white spots in fall and winter. Triangle-shaped wings in flight.",
+  sound:"Whistles, clicks, rattles and imitations of other birds.",
+  c:{crown:"#1e1e24",face:"#1e1e24",throat:"#20202a",breast:"#22222a",belly:"#24242c",back:"#1e1e24",wing:"#1a1a20",tail:"#1a1a20",bill:"#3a3a3a"},f:{spots:"all",shorttail:true,longbill:true}},
+ {n:"Red-winged Blackbird",s:"Agelaius phoeniceus",shape:"song",size:3,season:"year",hab:["water","field"],col:["black","red"],
+  marks:"Males are all black with red-and-yellow shoulder patches. Females look like large, heavily streaked brown sparrows.",
+  sound:"Gurgling 'conk-la-reee' from cattails and fence posts.",
+  c:{crown:"#111",face:"#111",throat:"#111",breast:"#111",belly:"#141414",back:"#111",wing:"#111",wingbar:"#d62828",tail:"#111",bill:"#111"},f:{epaulet:true}},
+ {n:"Brewer's Blackbird",s:"Euphagus cyanocephalus",shape:"song",size:3,season:"year",hab:["field","yard"],col:["black"],
+  marks:"Males glossy black with a pale yellow eye. Females plain gray-brown with a dark eye. Walks around parking lots and fields.",
+  sound:"Short creaky 'tsheee' and a sharp 'check'.",
+  c:{crown:"#1a1a26",face:"#1a1a26",throat:"#1a1a26",breast:"#1c1c28",belly:"#1e1e2a",back:"#1a1a26",wing:"#16162a",tail:"#16162a",bill:"#111"},f:{eye:"#f2e98a"}},
+ {n:"Mourning Dove",s:"Zenaida macroura",shape:"song",size:3,season:"year",hab:["yard","field"],col:["brown","gray"],
+  marks:"Slim, soft tan-gray with black spots on the wings and a long pointed tail. Wings whistle on takeoff.",
+  sound:"Slow, mournful 'coo-OO-oo, oo, oo'.",
+  c:{crown:"#a8a0a0",face:"#c8b8a4",throat:"#d8c4ae",breast:"#cdb49a",belly:"#d8c6b0",back:"#a8957e",wing:"#a8957e",tail:"#9a8a7a",bill:"#333"},f:{wingspots:"#222",longtail:true,smallhead:true}},
+ {n:"Eurasian Collared-Dove",s:"Streptopelia decaocto",shape:"song",size:4,season:"year",hab:["yard","field"],col:["gray","brown","black"],
+  marks:"Pale sandy-gray with a thin black half-collar on the back of the neck. Square-tipped tail. Introduced and now common in towns.",
+  sound:"Three-part 'coo-COO-coo', repeated over and over.",
+  c:{crown:"#c8c2b8",face:"#d4cec4",throat:"#d4cec4",breast:"#d0c8bc",belly:"#ddd6cc",back:"#c2b8aa",wing:"#b8ae9e",tail:"#c0b6a8",bill:"#222"},f:{collar:true,smallhead:true}},
+ {n:"Red-tailed Hawk",s:"Buteo jamaicensis",shape:"raptor",size:5,season:"year",hab:["field","air"],col:["brown","white","orange"],
+  marks:"Brown back, pale breast with a dark streaky belly band, brick-red tail on adults. Perches on poles along highways.",
+  sound:"Hoarse, falling scream 'kee-eeeer'. The hawk sound used in movies.",
+  c:{crown:"#6b4a32",face:"#6b4a32",throat:"#f0e8dc",breast:"#f2ebe0",belly:"#f2ebe0",back:"#5e4030",wing:"#5e4030",tail:"#b5522e",bill:"#333"},f:{streaks:"belly"}},
+ {n:"American Kestrel",s:"Falco sparverius",shape:"raptor",size:3,season:"year",hab:["field"],col:["orange","blue","white","black"],
+  marks:"Small falcon. Rusty back and tail, blue-gray wings on males, two black stripes on a white face. Hovers over fields and perches on wires.",
+  sound:"Rapid 'klee-klee-klee'.",
+  c:{crown:"#6a7fa8",face:"#f2efe8",throat:"#f5f2ea",breast:"#e8c49a",belly:"#f0dcc0",back:"#c2643a",wing:"#6a7fa8",tail:"#c2643a",bill:"#333"},f:{spots:"belly",mustache:"#111"}},
+ {n:"Bald Eagle",s:"Haliaeetus leucocephalus",shape:"raptor",size:5,season:"year",hab:["water","air"],col:["white","brown","yellow"],
+  marks:"Dark brown body with a white head and tail and a heavy yellow bill. Young birds are mottled brown for 4 to 5 years.",
+  sound:"Surprisingly weak, high chirping whistles.",
+  c:{crown:"#fafafa",face:"#fafafa",throat:"#fafafa",breast:"#3a2a1e",belly:"#3a2a1e",back:"#3a2a1e",wing:"#2e2218",tail:"#fafafa",bill:"#f0c020"},f:{eye:"#e8c020"}},
+ {n:"Turkey Vulture",s:"Cathartes aura",shape:"raptor",size:5,season:"summer",hab:["air","field"],col:["black","red"],
+  marks:"Bare red head. Soars with wings in a shallow V, teetering side to side. Underwings are two-toned, silvery behind and dark in front.",
+  sound:"Mostly silent. Hisses when disturbed.",
+  c:{crown:"#c03030",face:"#c03030",throat:"#6a2a2a",breast:"#2a2420",belly:"#2a2420",back:"#2a2420",wing:"#3a3028",tail:"#2a2420",bill:"#e8e0d0"},f:{smallhead:true}},
+ {n:"Osprey",s:"Pandion haliaetus",shape:"raptor",size:5,season:"summer",hab:["water","air"],col:["white","brown"],
+  marks:"Dark brown above, white below, with a dark stripe through the eye. Wings bent like a gull's. Nests on platforms along rivers.",
+  sound:"Series of high, whistled 'chewk' notes.",
+  c:{crown:"#fafafa",face:"#fafafa",throat:"#fafafa",breast:"#fafafa",belly:"#fafafa",back:"#3a2a1e",wing:"#3a2a1e",tail:"#4a3a2e",bill:"#222"},f:{eyeline:"#3a2a1e",streaks:"breast",eye:"#e8c020"}},
+ {n:"Great Blue Heron",s:"Ardea herodias",shape:"wader",size:5,season:"year",hab:["water","field"],col:["gray","blue","white"],
+  marks:"Very tall blue-gray heron with a dagger bill and a black plume over the eye. Flies with neck tucked in an S. Hunts voles in fields too.",
+  sound:"Deep, hoarse croak: 'fraaahnk'.",
+  c:{crown:"#f2f2f0",face:"#f2f2f0",throat:"#e8e8e4",breast:"#8a98a6",belly:"#6a7a8a",back:"#7a8ca0",wing:"#6a7c90",tail:"#6a7c90",bill:"#e0b030"},f:{plume:"#111"}},
+ {n:"Mallard",s:"Anas platyrhynchos",shape:"water",size:5,season:"year",hab:["water"],col:["green","brown","gray"],
+  marks:"Males have a glossy green head, white neck ring and chestnut breast. Females are mottled brown with an orange-and-black bill. Both show a blue wing patch.",
+  sound:"Females give the classic loud 'quack-quack-quack'. Males are quieter and raspy.",
+  c:{crown:"#1a6a3a",face:"#1a6a3a",throat:"#1a6a3a",neck:"#1a6a3a",breast:"#6a3a2a",belly:"#c8c8c4",back:"#8a8a84",wing:"#6a6a64",wingbar:"#2a4ab0",tail:"#111",bill:"#e8d040"},f:{ring:"#ffffff"}},
+ {n:"Canada Goose",s:"Branta canadensis",shape:"water",size:5,season:"year",hab:["water","field"],col:["black","brown","white"],
+  marks:"Large goose with a long black neck and a white chinstrap. Grazes on lawns and fields.",
+  sound:"Deep, two-part honk: 'ha-ronk'.",
+  c:{crown:"#111",face:"#111",throat:"#f5f5f2",neck:"#111",breast:"#c8bca8",belly:"#e8e2d8",back:"#7a6a58",wing:"#6a5a4a",tail:"#111",bill:"#111"},f:{chinstrap:true}},
+ {n:"Cackling Goose",s:"Branta hutchinsii",shape:"water",size:4,season:"winter",hab:["field","water"],col:["black","brown","white"],
+  marks:"Looks like a small Canada Goose with a stubby bill, short neck and darker breast. Huge winter flocks feed in Willamette Valley grass fields.",
+  sound:"High-pitched yelping 'luk-luk', much higher than Canada Goose.",
+  c:{crown:"#111",face:"#111",throat:"#f5f5f2",neck:"#111",breast:"#8a7a68",belly:"#d8d0c4",back:"#6a5a4a",wing:"#5a4a3c",tail:"#111",bill:"#111"},f:{chinstrap:true,stubby:true}},
+ {n:"Killdeer",s:"Charadrius vociferus",shape:"song",size:3,season:"year",hab:["field"],col:["brown","white","black","orange"],
+  marks:"Brown back, white below with two black breast bands, orange rump in flight. Fakes a broken wing to lure you away from its nest.",
+  sound:"Shrill, endlessly repeated 'kill-deer, kill-deer'.",
+  c:{crown:"#8a6a4a",face:"#fafafa",throat:"#fafafa",breast:"#fafafa",belly:"#fafafa",back:"#8a6a4a",wing:"#8a6a4a",tail:"#c87a3a",bill:"#111"},f:{bands:"#111",double:true,legs:true}},
+ {n:"Western Meadowlark",s:"Sturnella neglecta",shape:"song",size:3,season:"year",hab:["field"],col:["yellow","brown","black"],
+  marks:"Bright yellow breast with a black V, streaky brown back, white outer tail feathers. Oregon's state bird.",
+  sound:"Rich, bubbling, flute-like song that tumbles downward.",
+  c:{crown:"#6a5038",face:"#e8e0c8",throat:"#f4cc1a",breast:"#f4cc1a",belly:"#f4d040",back:"#8a7050",wing:"#8a7050",tail:"#8a7050",bill:"#c8b8a0"},f:{vee:true,longbill:true,shorttail:true}},
+ {n:"Cedar Waxwing",s:"Bombycilla cedrorum",shape:"song",size:2,season:"year",hab:["yard","woods"],col:["brown","black","yellow"],
+  marks:"Silky tan-brown with a crest, black mask, yellow-tipped tail and red waxy wing tips. Travels in flocks to berry trees.",
+  sound:"Very high, thin 'sreeee' whistles.",
+  c:{crown:"#b08a5a",face:"#b08a5a",throat:"#2a2a2a",breast:"#b8925e",belly:"#e8d880",back:"#9a8060",wing:"#6a6a6a",tail:"#6a6a6a",bill:"#111"},f:{crest:true,mask:"#111",tailtip:"#f2d22a"}},
+ {n:"Pileated Woodpecker",s:"Dryocopus pileatus",shape:"song",size:4,season:"year",hab:["woods"],col:["black","red","white"],
+  marks:"Crow-sized black woodpecker with a flaming red crest and a white face stripe. Leaves big rectangular holes in trees.",
+  sound:"Wild, ringing 'kuk-kuk-kuk-kuk'. Slow, heavy drumming.",
+  c:{crown:"#d81b1b",face:"#111",throat:"#f5f5f2",breast:"#111",belly:"#111",back:"#111",wing:"#111",tail:"#111",bill:"#333"},f:{crest:true,eyebrow:"#f5f5f2",longbill:true}},
+ {n:"Belted Kingfisher",s:"Megaceryle alcyon",shape:"song",size:4,season:"year",hab:["water"],col:["blue","white","orange"],
+  marks:"Big shaggy-crested head, blue-gray back, white collar and a blue breast band. Females add a rusty belly band. Dives for fish.",
+  sound:"Loud, dry rattle as it flies along streams.",
+  c:{crown:"#4a6a8a",face:"#4a6a8a",throat:"#fafafa",breast:"#4a6a8a",belly:"#fafafa",back:"#4a6a8a",wing:"#3a5a7a",tail:"#3a5a7a",bill:"#222"},f:{crest:true,longbill:true,bighead:true}},
+ {n:"Golden-crowned Sparrow",s:"Zonotrichia atricapilla",shape:"song",size:2,season:"winter",hab:["yard","field"],col:["yellow","brown","gray","black"],
+  marks:"Large sparrow with a yellow forehead patch bordered in black, plain gray face and breast, streaky brown back.",
+  sound:"Three sad, descending whistles: 'oh dear me'.",
+  c:{crown:"#e8c020",face:"#8a8a86",throat:"#9a9a96",breast:"#a8a8a2",belly:"#c8c4bc",back:"#7a5a40",wing:"#7a5a40",wingbar:"#fafafa",tail:"#7a5a40",bill:"#8a8078"},f:{crownstripe:"#111"}},
+ {n:"White-crowned Sparrow",s:"Zonotrichia leucophrys",shape:"song",size:2,season:"year",hab:["yard","field"],col:["white","black","gray","brown"],
+  marks:"Bold black-and-white striped crown, gray face and breast, orange-pink bill.",
+  sound:"A clear whistle followed by buzzy trills and chips.",
+  c:{crown:"#fafafa",face:"#a8a8a4",throat:"#c8c8c4",breast:"#b8b8b4",belly:"#d8d6d0",back:"#8a6a4a",wing:"#8a6a4a",wingbar:"#fafafa",tail:"#8a6a4a",bill:"#e0a050"},f:{crownstripe:"#111",stripes:true}},
+ {n:"Fox Sparrow",s:"Passerella iliaca",shape:"song",size:3,season:"winter",hab:["yard","woods"],col:["brown","white"],
+  marks:"Big, dark chocolate-brown sparrow with heavy triangular spots below. Scratches backward with both feet at once.",
+  sound:"Sharp 'smack' call from dense brush.",
+  c:{crown:"#5a4436",face:"#5a4436",throat:"#e8e2d8",breast:"#e8e2d8",belly:"#ece8e0",back:"#5a4436",wing:"#5a4436",tail:"#6a4a3a",bill:"#a8a090"},f:{spots:"heavy"}},
+ {n:"Varied Thrush",s:"Ixoreus naevius",shape:"song",size:3,season:"winter",hab:["woods","yard"],col:["orange","gray","black"],
+  marks:"Robin-sized with an orange eyebrow, orange throat, black breast band and orange wing bars on slate gray.",
+  sound:"One long, eerie, buzzy whistle, repeated on different pitches.",
+  c:{crown:"#2e3e4e",face:"#2e3e4e",throat:"#e88a2a",breast:"#e88a2a",belly:"#f0a050",back:"#3a4a5a",wing:"#3a4a5a",wingbar:"#e88a2a",tail:"#2e3e4e",bill:"#333"},f:{eyebrow:"#e88a2a",bands:"#1a1a1a"}},
+ {n:"Ruby-crowned Kinglet",s:"Corthylio calendula",shape:"song",size:1,season:"winter",hab:["woods","yard"],col:["green","gray","white"],
+  marks:"Tiny olive-green bird with a broken white eye ring and white wing bar. Constantly flicks its wings. The red crown patch is usually hidden.",
+  sound:"Dry, chattering 'ji-dit'.",
+  c:{crown:"#7a8a5a",face:"#8a9a68",throat:"#c8cca8",breast:"#c4c8a0",belly:"#d0d4b0",back:"#7a8a52",wing:"#3a3a30",wingbar:"#f5f5f0",tail:"#5a6040",bill:"#333"},f:{eyering:true}},
+ {n:"Yellow-rumped Warbler",s:"Setophaga coronata",shape:"song",size:2,season:"winter",hab:["yard","woods","water"],col:["yellow","gray","white"],
+  marks:"Gray-brown and streaky in winter with a yellow rump patch, yellow throat and yellow sides. Abundant from October to April.",
+  sound:"Sharp 'chep' call, given often.",
+  c:{crown:"#8a8a80",face:"#8a8a80",throat:"#f0d020",breast:"#c8c4b8",belly:"#ece9e0",back:"#8a8478",wing:"#5a5a54",wingbar:"#f5f5f0",tail:"#5a5a54",bill:"#222"},f:{streaks:"breast",rump:"#f0d020"}},
+ {n:"Black-headed Grosbeak",s:"Pheucticus melanocephalus",shape:"song",size:3,season:"summer",hab:["woods","yard"],col:["orange","black","white"],
+  marks:"Males have a black head, cinnamon-orange breast and black wings with white patches. Huge pale bill.",
+  sound:"Sounds like a robin that took singing lessons: sweeter, faster and bouncier. Call is a sharp 'pik'.",
+  c:{crown:"#111",face:"#111",throat:"#c8702a",breast:"#d8862e",belly:"#e8b04a",back:"#6a3a1e",wing:"#111",wingbar:"#fafafa",tail:"#111",bill:"#d8d0c0"},f:{bigbill:true}},
+ {n:"Western Tanager",s:"Piranga ludoviciana",shape:"song",size:2,season:"summer",hab:["woods"],col:["yellow","red","black"],
+  marks:"Males are bright yellow with a red-orange head and black back, wings and tail. Most visible during May and September migration.",
+  sound:"Hoarse, robin-like phrases. Call is a rising 'pit-er-ick'.",
+  c:{crown:"#e0402a",face:"#e0402a",throat:"#f2d22a",breast:"#f2d22a",belly:"#f2d22a",back:"#111",wing:"#111",wingbar:"#f2e05a",tail:"#111",bill:"#c8b07a"},f:{}},
+ {n:"Violet-green Swallow",s:"Tachycineta thalassina",shape:"song",size:2,season:"summer",hab:["air","water"],col:["green","white"],
+  marks:"Green back and violet rump, bright white underparts. White wraps up behind the eye and onto the sides of the rump.",
+  sound:"Thin, twittering 'chit-chit' in flight.",
+  c:{crown:"#2e6a4a",face:"#fafafa",throat:"#fafafa",breast:"#fafafa",belly:"#fafafa",back:"#3a7a5a",wing:"#4a3a6a",tail:"#4a3a6a",bill:"#111"},f:{swallow:true}},
+ {n:"Barn Swallow",s:"Hirundo rustica",shape:"song",size:2,season:"summer",hab:["air","field"],col:["blue","orange"],
+  marks:"Steely blue above, rusty throat, buff below, and a deeply forked tail. Nests under eaves and in barns.",
+  sound:"Squeaky, chattering warble with a grating rattle.",
+  c:{crown:"#1e3a7a",face:"#1e3a7a",throat:"#a84a2a",breast:"#e0a070",belly:"#e8b88a",back:"#1e3a7a",wing:"#1e2e5a",tail:"#1e2e5a",bill:"#111"},f:{forked:true,swallow:true}},
+ {n:"Rufous Hummingbird",s:"Selasphorus rufus",shape:"song",size:1,season:"summer",hab:["yard","woods"],col:["orange","green","white"],
+  marks:"Males are bright orange-rufous with a glowing orange-red throat. Feisty and chases other hummingbirds. Here February to August.",
+  sound:"Hard 'chewp' notes. Wings make a high whine in flight.",
+  c:{crown:"#8a7a3a",face:"#d86a2a",throat:"#e85a1a",breast:"#fafafa",belly:"#d88a4a",back:"#c8642a",wing:"#3a3a3a",tail:"#c8642a",bill:"#111"},f:{hummer:true}},
+ {n:"Swainson's Thrush",s:"Catharus ustulatus",shape:"song",size:2,season:"summer",hab:["woods"],col:["brown","white"],
+  marks:"Plain olive-brown back, buffy eye ring (spectacles), spotted breast. Hard to see, easy to hear.",
+  sound:"Upward-spiraling, flute-like song at dusk. Call is a liquid 'whit' like a water drop.",
+  c:{crown:"#8a7a58",face:"#c8b88a",throat:"#e8dcc0",breast:"#e8dcc0",belly:"#f2efe8",back:"#8a7a58",wing:"#7a6a48",tail:"#7a6a48",bill:"#333"},f:{spots:"breast",eyering:"#e8d8a8"}}
+];
+
+// ---------- season ----------
+const MONTH = new Date().getMonth(); // 0 = Jan
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const isWinter = m => m>=9 || m<=3;   // Oct–Apr
+const isSummer = m => m>=3 && m<=8;   // Apr–Sep
+const here = b => b.season==="year" || (b.season==="winter" && isWinter(MONTH)) || (b.season==="summer" && isSummer(MONTH));
+const SEASON_TXT = {year:"Here all year", winter:"Winter visitor, Oct–Apr", summer:"Summer visitor, Apr–Sep"};
+const SIZE_TXT = ["","Tiny, under 5 in","Sparrow-size, 5–7 in","Robin-size, 8–11 in","Crow-size, 12–20 in","Large, over 20 in"];
+const HAB_TXT = {yard:"Yards & feeders",woods:"Woods",field:"Open fields",water:"Water & wetlands",air:"Usually flying"};
+const COLORS = {black:"#1a1a1a",white:"#f5f5f2",gray:"#8f949a",brown:"#7a5a40",red:"#c6283a",orange:"#d8862e",yellow:"#f2d22a",blue:"#2f5fb0",green:"#3e7a4a"};
+
+(function(){
+  const arriving = B.filter(b=>b.season==="winter").length;
+  const el = document.getElementById("seasonLine");
+  el.innerHTML = `${MONTHS[MONTH]} in Yamhill County: <b>${isWinter(MONTH)?`${arriving} winter visitors are here`:"summer breeders are here"}</b>, plus the year-round regulars.`;
+})();
+
+// ---------- plate drawing ----------
+const O = 'stroke="rgba(0,0,0,.28)" stroke-width="1"';
+const ell=(cx,cy,rx,ry,fill,extra="")=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${fill}" ${O} ${extra}/>`;
+function marksIn(cx,cy,rx,ry,kind,color,seed){
+  let out="",i=0;
+  for(let y=cy-ry+4;y<cy+ry-2;y+=6){for(let x=cx-rx+4;x<cx+rx-2;x+=7){
+    const dx=(x-cx)/rx,dy=(y-cy)/ry; if(dx*dx+dy*dy>0.75) continue; i++;
+    const jx=((i*37+seed)%5)-2, jy=((i*53+seed)%3)-1;
+    if(kind==="streak") out+=`<path d="M${x+jx},${y+jy} l1,4" stroke="${color}" stroke-width="1.8" stroke-linecap="round"/>`;
+    else out+=`<circle cx="${x+jx}" cy="${y+jy}" r="${kind==="heavy"?2.2:1.4}" fill="${color}"/>`;
+  }} return out;
+}
+function songbird(c,f){
+  const s=[]; const hr=f.bighead?23:f.smallhead?16:20; const hx=62, hy=58;
+  s.push(`<path d="M68,127 L162,127" stroke="#6b5640" stroke-width="5" stroke-linecap="round"/>`);
+  s.push(`<path d="M98,104 L95,126 M110,104 L113,126" stroke="#4a3f36" stroke-width="2.5"/>`);
+  if(f.legs) s.push(`<path d="M98,104 L94,127 M110,104 L114,127" stroke="#c8b89a" stroke-width="2.5"/>`);
+  // tail
+  const tl = f.longtail?205:f.shorttail?172:190;
+  if(f.forked) s.push(`<path d="M140,80 L200,90 L180,96 L198,108 L138,94Z" fill="${c.tail}" ${O}/>`);
+  else s.push(`<path d="M140,80 L${tl},94 L${tl-4},106 L136,93Z" fill="${c.tail}" ${O}/>`);
+  if(f.tailtip) s.push(`<path d="M${tl},94 L${tl-4},106" stroke="${f.tailtip}" stroke-width="5"/>`);
+  if(f.rump) s.push(ell(140,82,8,6,f.rump));
+  s.push(ell(105,80,46,27,c.back));
+  s.push(ell(98,92,38,17,c.belly));
+  s.push(ell(76,82,20,19,c.breast));
+  const mc = (c.belly==="#fafafa"||c.belly.startsWith("#f")||c.belly.startsWith("#e"))? "#4a3a2e" : "#f2f2ee";
+  if(f.streaks){ if(f.streaks!=="belly") s.push(marksIn(76,82,18,17,"streak","#5a3e2c",1)); if(f.streaks!=="breast"&&f.streaks!=="throat") s.push(marksIn(98,93,34,14,"streak","#5a3e2c",3)); }
+  if(f.spots){ const col=f.spots==="all"?"#f2f2ee":"#3a2a20"; const k=f.spots==="heavy"?"heavy":"spot";
+    if(f.spots!=="belly") s.push(marksIn(76,82,18,17,k,col,2));
+    if(f.spots!=="breast") s.push(marksIn(98,93,34,14,k,col,4));
+    if(f.spots==="all") s.push(marksIn(108,74,34,14,k,col,6)); }
+  if(f.vee) s.push(`<path d="M62,76 L76,90 L90,76" stroke="#111" stroke-width="4" fill="none"/>`);
+  if(f.bands){ s.push(`<path d="M58,78 Q75,86 93,78" stroke="${f.bands}" stroke-width="4" fill="none"/>`); if(f.double) s.push(`<path d="M60,88 Q76,95 92,88" stroke="${f.bands}" stroke-width="3.5" fill="none"/>`); }
+  // wing
+  s.push(ell(118,76,32,14,c.wing,'transform="rotate(-8 118 76)"'));
+  if(f.epaulet) s.push(`<path d="M94,72 Q104,64 114,70" stroke="${c.wingbar}" stroke-width="6" fill="none"/><path d="M94,76 Q104,69 114,74" stroke="#f2c230" stroke-width="2" fill="none"/>`);
+  else if(c.wingbar && !f.wingspots) s.push(`<path d="M98,80 Q118,86 140,79" stroke="${c.wingbar}" stroke-width="3" fill="none"/><path d="M100,74 Q118,79 136,73" stroke="${c.wingbar}" stroke-width="2" fill="none"/>`);
+  if(f.wingspots){ const wc = typeof f.wingspots==="string"?f.wingspots:c.wingbar; [[100,74],[110,78],[120,75],[128,80],[136,76],[114,71]].forEach(([x,y])=>s.push(`<circle cx="${x}" cy="${y}" r="2" fill="${wc}"/>`)); }
+  if(f.hummer){ s.push(`<path d="M110,66 Q150,40 170,52 Q140,70 118,76Z" fill="${c.wing}" ${O} opacity=".85"/>`); }
+  // head
+  s.push(`<circle cx="${hx}" cy="${hy}" r="${hr}" fill="${c.face}" ${O}/>`);
+  s.push(`<path d="M${hx-hr},${hy-1} A${hr},${hr} 0 0 1 ${hx+hr},${hy-1} Q${hx},${hy-8} ${hx-hr},${hy-1}Z" fill="${c.crown}"/>`);
+  if(f.crownstripe){ s.push(`<path d="M${hx-hr+3},${hy-6} Q${hx},${hy-hr-2} ${hx+hr-2},${hy-5}" stroke="${f.crownstripe}" stroke-width="3" fill="none"/>`); if(f.stripes) s.push(`<path d="M${hx-hr+5},${hy-12} Q${hx},${hy-hr-6} ${hx+hr-6},${hy-13}" stroke="${f.crownstripe}" stroke-width="3" fill="none"/>`); }
+  if(f.crest) s.push(`<path d="M${hx+4},${hy-hr+2} L${hx+hr+12},${hy-hr-6} L${hx+hr},${hy-4}Z" fill="${c.crown}" ${O}/>`);
+  if(f.nape) s.push(`<rect x="${hx+hr-8}" y="${hy-12}" width="7" height="6" fill="${f.nape}"/>`);
+  if(f.collar) s.push(`<path d="M${hx+10},${hy+12} L${hx+20},${hy+6}" stroke="#111" stroke-width="3"/>`);
+  s.push(ell(hx-2,hy+16,11,7,c.throat));
+  if(f.swallow) s.push(`<path d="M${hx-hr+6},${hy+2} Q${hx},${hy+6} ${hx+hr-2},${hy-2}" stroke="#fafafa" stroke-width="5" fill="none"/>`);
+  if(f.mask) s.push(`<path d="M${hx-hr+2},${hy-4} L${hx+8},${hy-6} L${hx+6},${hy+2} L${hx-hr+4},${hy+3}Z" fill="${f.mask}"/>`);
+  if(f.eyebrow) s.push(`<path d="M${hx-15},${hy-8} Q${hx-4},${hy-14} ${hx+10},${hy-8}" stroke="${f.eyebrow}" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+  if(f.eyeline) s.push(`<path d="M${hx-18},${hy-3} L${hx+12},${hy-2}" stroke="${f.eyeline}" stroke-width="3"/><path d="M${hx-15},${hy-9} Q${hx-4},${hy-14} ${hx+10},${hy-9}" stroke="#fafafa" stroke-width="2.5" fill="none"/>`);
+  if(f.mustache) s.push(`<path d="M${hx-14},${hy+6} L${hx-2},${hy+10}" stroke="${f.mustache}" stroke-width="3.5" stroke-linecap="round"/>`);
+  if(f.eyering) s.push(`<circle cx="${hx-8}" cy="${hy-3}" r="4.6" fill="none" stroke="${typeof f.eyering==='string'?f.eyering:'#fafafa'}" stroke-width="1.8"/>`);
+  if(f.ring) s.push(`<path d="M${hx-6},${hy+20} Q${hx+6},${hy+24} ${hx+14},${hy+16}" stroke="${f.ring}" stroke-width="3" fill="none"/>`);
+  s.push(`<circle cx="${hx-8}" cy="${hy-3}" r="3" fill="${f.eye||'#111'}" stroke="#111" stroke-width=".8"/><circle cx="${hx-9}" cy="${hy-4}" r=".9" fill="#fff"/>`);
+  const bx=hx-hr+1;
+  if(f.hummer) s.push(`<path d="M${bx},${hy} L${bx-36},${hy+3} L${bx},${hy+4}Z" fill="${c.bill}"/>`);
+  else if(f.bigbill) s.push(`<path d="M${bx+1},${hy-6} L${bx-15},${hy+2} L${bx+1},${hy+8}Z" fill="${c.bill}" ${O}/>`);
+  else if(f.longbill) s.push(`<path d="M${bx},${hy-2} L${bx-20},${hy+2} L${bx},${hy+5}Z" fill="${c.bill}" ${O}/>`);
+  else s.push(`<path d="M${bx},${hy-3} L${bx-12},${hy+1} L${bx},${hy+5}Z" fill="${c.bill}" ${O}/>`);
+  return s.join("");
+}
+function water(c,f){
+  const s=[];
+  s.push(`<path d="M10,116 q10,-5 20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0" stroke="#6f97ab" stroke-width="2.5" fill="none"/>`);
+  s.push(`<path d="M160,92 L184,84 L178,100Z" fill="${c.tail}" ${O}/>`);
+  s.push(ell(118,96,52,20,c.back));
+  s.push(ell(118,105,46,11,c.belly));
+  s.push(ell(76,96,20,17,c.breast));
+  s.push(ell(126,90,34,11,c.wing));
+  if(c.wingbar) s.push(`<path d="M108,92 L130,94" stroke="${c.wingbar}" stroke-width="5"/>`);
+  const nk=f.stubby?{a:"M56,62 L68,60 L82,88 L66,92Z",hx:60,hy:56}:{a:"M52,52 L64,50 L80,88 L64,92Z",hx:56,hy:46};
+  s.push(`<path d="${nk.a}" fill="${c.neck||c.throat}" ${O}/>`);
+  if(f.ring) s.push(`<path d="M68,80 L80,78" stroke="${f.ring}" stroke-width="3"/>`);
+  const {hx,hy}=nk; const r=14;
+  s.push(`<circle cx="${hx}" cy="${hy}" r="${r}" fill="${c.face}" ${O}/>`);
+  s.push(`<path d="M${hx-r},${hy-1} A${r},${r} 0 0 1 ${hx+r},${hy-1} Q${hx},${hy-6} ${hx-r},${hy-1}Z" fill="${c.crown}"/>`);
+  if(f.chinstrap) s.push(`<path d="M${hx-2},${hy+2} Q${hx+6},${hy+12} ${hx+12},${hy+2} Q${hx+6},${hy+6} ${hx-2},${hy+2}Z" fill="${c.throat}"/><path d="M${hx},${hy-2} Q${hx+6},${hy+10} ${hx+12},${hy}" stroke="${c.throat}" stroke-width="4" fill="none"/>`);
+  s.push(`<circle cx="${hx-5}" cy="${hy-3}" r="2.2" fill="#111"/>`);
+  const bl=f.stubby?12:19;
+  s.push(`<path d="M${hx-13},${hy-2} L${hx-13-bl},${hy+1} L${hx-13-bl},${hy+6} L${hx-13},${hy+5}Z" fill="${c.bill}" ${O}/>`);
+  return s.join("");
+}
+function wader(c,f){
+  const s=[];
+  s.push(`<path d="M112,86 L108,136 M122,86 L126,136" stroke="#8a7a5a" stroke-width="3"/>`);
+  s.push(`<path d="M146,70 L172,80 L146,86Z" fill="${c.tail}" ${O}/>`);
+  s.push(ell(118,70,34,20,c.back));
+  s.push(ell(112,82,26,9,c.belly));
+  s.push(`<path d="M80,30 Q70,48 86,60 Q94,68 92,76 L106,70 Q102,58 96,52 Q86,42 92,30Z" fill="${c.breast}" ${O}/>`);
+  s.push(`<path d="M82,34 Q76,48 88,58" stroke="${c.throat}" stroke-width="4" fill="none"/>`);
+  s.push(ell(126,66,30,14,c.wing));
+  s.push(`<circle cx="86" cy="24" r="9" fill="${c.face}" ${O}/>`);
+  if(f.plume) s.push(`<path d="M78,19 Q88,14 96,20" stroke="${f.plume}" stroke-width="3.5" fill="none"/><path d="M95,20 L118,16" stroke="${f.plume}" stroke-width="1.8"/>`);
+  s.push(`<circle cx="82" cy="23" r="1.9" fill="#e8c020" stroke="#111" stroke-width=".8"/>`);
+  s.push(`<path d="M78,22 L42,26 L78,28Z" fill="${c.bill}" ${O}/>`);
+  return s.join("");
+}
+function raptor(c,f){
+  const s=[]; const r=f.smallhead?12:17; const hx=92, hy=f.smallhead?40:36;
+  s.push(`<path d="M60,131 L150,131" stroke="#6b5640" stroke-width="5" stroke-linecap="round"/>`);
+  s.push(`<path d="M90,108 L112,108 L118,132 L86,132Z" fill="${c.tail}" ${O}/>`);
+  s.push(ell(104,76,28,40,c.back));
+  s.push(ell(96,88,18,26,c.belly));
+  s.push(ell(94,64,17,15,c.breast));
+  if(f.streaks==="belly") s.push(marksIn(96,92,16,10,"streak","#4a3020",5));
+  if(f.streaks==="breast") {s.push(`<path d="M80,58 Q94,66 108,58" stroke="#7a5a40" stroke-width="3" fill="none"/>`);s.push(marksIn(94,62,14,8,"spot","#7a5a40",7));}
+  if(f.spots==="belly") s.push(marksIn(96,90,15,18,"spot","#3a2a20",8));
+  s.push(ell(114,78,16,37,c.wing));
+  s.push(`<path d="M90,118 L90,131 M100,118 L100,131" stroke="#d0a830" stroke-width="3"/>`);
+  s.push(`<circle cx="${hx}" cy="${hy}" r="${r}" fill="${c.face}" ${O}/>`);
+  s.push(`<path d="M${hx-r},${hy-1} A${r},${r} 0 0 1 ${hx+r},${hy-1} Q${hx},${hy-6} ${hx-r},${hy-1}Z" fill="${c.crown}"/>`);
+  if(!f.smallhead) s.push(ell(hx-2,hy+13,9,6,c.throat));
+  if(f.eyeline) s.push(`<path d="M${hx-12},${hy-3} L${hx+14},${hy+6}" stroke="${f.eyeline}" stroke-width="3.5"/>`);
+  if(f.mustache) s.push(`<path d="M${hx-9},${hy+1} L${hx-8},${hy+12} M${hx+2},${hy} L${hx+4},${hy+12}" stroke="${f.mustache}" stroke-width="3"/>`);
+  s.push(`<circle cx="${hx-7}" cy="${hy-3}" r="2.8" fill="${f.eye||'#111'}" stroke="#111" stroke-width=".8"/>`);
+  const bx=hx-r+1;
+  s.push(`<path d="M${bx},${hy-2} L${bx-10},${hy+2} Q${bx-11},${hy+9} ${bx-5},${hy+7} L${bx+1},${hy+5}Z" fill="${c.bill}" ${O}/>`);
+  return s.join("");
+}
+function plate(b){
+  const g = b.shape==="water"?water:b.shape==="wader"?wader:b.shape==="raptor"?raptor:songbird;
+  return `<svg viewBox="0 0 210 140" role="img" aria-label="Color plate of a mystery bird">${g(b.c,b.f||{})}</svg>`;
+}
+// ---------- photos (iNaturalist, loaded live; drawn plate shows until a photo arrives) ----------
+const photoCache = (()=>{try{return JSON.parse(localStorage.getItem("ybt.photos")||"{}")}catch(e){return {}}})();
+const inflight = {};
+function getPhoto(b){
+  if(photoCache[b.s]) return Promise.resolve(photoCache[b.s]);
+  if(inflight[b.s]) return inflight[b.s];
+  const url = "https://api.inaturalist.org/v1/taxa?rank=species&per_page=1&q="+encodeURIComponent(b.s);
+  inflight[b.s] = fetch(url).then(r=>r.ok?r.json():Promise.reject()).then(j=>{
+    const p=j.results&&j.results[0]&&j.results[0].default_photo; if(!p) return null;
+    const v={m:p.medium_url,sq:p.square_url,a:p.attribution||""};
+    photoCache[b.s]=v; try{localStorage.setItem("ybt.photos",JSON.stringify(photoCache))}catch(e){}
+    return v;
+  }).catch(()=>null);
+  return inflight[b.s];
+}
+const pic = (b,small) => `<span class="pic" data-n="${b.n}" data-small="${small?1:""}">${plate(b)}</span>`;
+function hydrate(root){
+  root.querySelectorAll(".pic[data-n]").forEach(el=>{
+    const b=B.find(x=>x.n===el.dataset.n); el.removeAttribute("data-n");
+    getPhoto(b).then(p=>{ if(!p) return;
+      const img=new Image(); img.alt="Photo of a bird"; img.loading="lazy";
+      img.onload=()=>{el.innerHTML=""; el.appendChild(img); const c=document.createElement("span"); c.className="credit"; c.textContent=p.a+" · iNaturalist"; el.appendChild(c);};
+      img.src = el.dataset.small ? p.sq : p.m;
+    });
+  });
+}
+const sizebar = n => `<span class="sizebar" title="${SIZE_TXT[n]}" aria-hidden="true">${[1,2,3,4,5].map(i=>`<i class="${i===n?'on':''}" style="height:${4+i*3}px"></i>`).join("")}</span>`;
+const slug = n => n.replace(/'/g,"").replace(/ /g,"_");
+function detailHTML(b){
+  return `<div class="detail">
+    <div><p class="name">${b.n}</p><p class="sci">${b.s}</p></div>
+    <div><h3>Field marks</h3><p>${b.marks}</p></div>
+    <div><h3>Listen for</h3><p>${b.sound}</p></div>
+    <div class="links">
+      <a href="https://www.allaboutbirds.org/guide/${slug(b.n)}" target="_blank" rel="noopener">Photos &amp; sounds ↗</a>
+      <a href="https://xeno-canto.org/explore?query=${encodeURIComponent(b.n)}" target="_blank" rel="noopener">Recordings ↗</a>
+      <a href="https://ebird.org/species/search?q=${encodeURIComponent(b.n)}" target="_blank" rel="noopener">eBird ↗</a>
+    </div></div>`;
+}
+const factsHTML = b => `<div class="facts">
+  <span class="fact">${sizebar(b.size)} ${SIZE_TXT[b.size]}</span>
+  <span class="fact">${SEASON_TXT[b.season]}</span>
+  ${b.hab.map(h=>`<span class="fact">${HAB_TXT[h]}</span>`).join("")}</div>`;
+
+// ---------- storage ----------
+const store = {
+  get(k,d){try{const v=localStorage.getItem("ybt."+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem("ybt."+k,JSON.stringify(v))}catch(e){}}
+};
+const shuffle = a => {a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pool = () => document.getElementById("inSeason").checked ? B.filter(here) : B;
+
+// ---------- flashcards ----------
+let deck=[], idx=0, flipped=false, learned=new Set(store.get("learned",[]));
+function newDeck(){
+  const p=pool(); const todo=p.filter(b=>!learned.has(b.n));
+  deck = shuffle(todo.length?todo:p); idx=0; flipped=false; renderCards();
+}
+function renderCards(){
+  const v=document.getElementById("view-cards");
+  const p=pool(); const done=p.filter(b=>learned.has(b.n)).length;
+  if(idx>=deck.length){
+    v.innerHTML=`<div class="card"><div class="done"><p class="big">${done} / ${p.length}</p><p>birds marked "Got it" in this set.</p>
+      <div class="btns" style="width:100%"><button class="btn" id="again">Study again</button><button class="btn ghost" id="reset">Reset progress</button></div></div></div>`;
+    v.querySelector("#again").onclick=newDeck;
+    v.querySelector("#reset").onclick=()=>{learned.clear();store.set("learned",[]);newDeck()};
+    return;
+  }
+  const b=deck[idx];
+  v.innerHTML=`<div class="card">
+    <div class="plate"><span class="tag">Card ${idx+1} of ${deck.length}</span>${pic(b)}</div>
+    <div class="card-body">
+      ${factsHTML(b)}
+      ${flipped?detailHTML(b):`<p class="clue-q">Who's this?</p><p class="note">Think of the name, then check. Photos may show a female or young bird.</p>`}
+      <div class="btns">${flipped
+        ?`<button class="btn ghost" id="still">Still learning</button><button class="btn" id="got">Got it</button>`
+        :`<button class="btn" id="flip">Show answer</button>`}</div>
+    </div></div>
+    <div class="meta"><span>${done} of ${p.length} learned</span><button class="chip" id="shuf">Shuffle</button></div>`;
+  if(flipped){
+    v.querySelector("#got").onclick=()=>{learned.add(b.n);store.set("learned",[...learned]);idx++;flipped=false;renderCards()};
+    v.querySelector("#still").onclick=()=>{deck.push(b);idx++;flipped=false;renderCards()};
+  } else v.querySelector("#flip").onclick=()=>{flipped=true;renderCards()};
+  v.querySelector("#shuf").onclick=newDeck;
+  hydrate(v);
+}
+
+// ---------- quiz ----------
+let qMode=store.get("qmode","look"), qList=[], qi=0, qScore=0, qAnswered=false, qChoices=[];
+function newQuiz(){ qList=shuffle(pool()).slice(0,10); qi=0; qScore=0; nextQ(); }
+function nextQ(){
+  qAnswered=false;
+  if(qi<qList.length){
+    const b=qList[qi]; const p=pool();
+    const near=shuffle(p.filter(x=>x!==b && Math.abs(x.size-b.size)<=1));
+    const rest=shuffle(p.filter(x=>x!==b && !near.includes(x)));
+    qChoices=shuffle([b,...near.concat(rest).slice(0,3)]);
+  }
+  renderQuiz();
+}
+function renderQuiz(){
+  const v=document.getElementById("view-quiz");
+  const best=store.get("best_"+qMode,0);
+  const modes=`<div class="row"><span class="label">Clue</span>
+    ${[["look","Plate"],["listen","Sound"],["marks","Field marks"]].map(([k,t])=>`<button class="chip" data-mode="${k}" aria-pressed="${qMode===k}">${t}</button>`).join("")}</div>`;
+  if(qi>=qList.length){
+    if(qScore>best) store.set("best_"+qMode,qScore);
+    v.innerHTML=`${modes}<div class="card" style="margin-top:12px"><div class="done"><p class="big">${qScore} / ${qList.length}</p>
+      <p>${qScore>best?"New best for this clue type.":`Best so far: ${Math.max(best,qScore)} / 10`}</p>
+      <button class="btn" id="qagain">New round</button></div></div>`;
+    v.querySelector("#qagain").onclick=newQuiz; bindModes(v); return;
+  }
+  const b=qList[qi];
+  let prompt;
+  if(qMode==="look") prompt=`<div class="plate">${pic(b)}</div>`;
+  else prompt=`<div class="card-body" style="padding-bottom:0"><span class="label">${qMode==="listen"?"You hear":"You see"}</span><p class="clue">${qMode==="listen"?b.sound:b.marks.replace(new RegExp(b.n.split(" ").pop(),"gi"),"___")}</p></div>`;
+  v.innerHTML=`${modes}
+    <div class="card" style="margin-top:12px">${prompt}
+      <div class="card-body">
+        ${qMode==="look"?factsHTML(b):""}
+        <div class="choices">${qChoices.map((c,i)=>`<button class="choice" data-i="${i}">${c.n}</button>`).join("")}</div>
+        <div id="qfb"></div>
+      </div></div>
+    <div class="meta"><span>Question ${qi+1} of ${qList.length}</span><span>Score ${qScore}</span></div>`;
+  bindModes(v); hydrate(v);
+  v.querySelectorAll(".choice").forEach(btn=>btn.onclick=()=>{
+    if(qAnswered) return; qAnswered=true;
+    const pick=qChoices[+btn.dataset.i]; const ok=pick===b; if(ok) qScore++;
+    v.querySelectorAll(".choice").forEach(x=>{x.disabled=true; const c=qChoices[+x.dataset.i]; if(c===b) x.classList.add("right"); else if(x===btn) x.classList.add("wrong");});
+    v.querySelector("#qfb").innerHTML=`${qMode!=="look"?`<div class="plate" style="border-radius:12px;border:0">${pic(b)}</div>`:""}${detailHTML(b)}<div class="btns" style="margin-top:12px"><button class="btn" id="qnext">${qi+1<qList.length?"Next bird":"See score"}</button></div>`;
+    v.querySelector(".meta span:last-child").textContent="Score "+qScore;
+    hydrate(v.querySelector("#qfb"));
+    v.querySelector("#qnext").onclick=()=>{qi++;nextQ()};
+    v.querySelector("#qnext").focus();
+  });
+}
+function bindModes(v){ v.querySelectorAll("[data-mode]").forEach(c=>c.onclick=()=>{qMode=c.dataset.mode;store.set("qmode",qMode);newQuiz()}); }
+
+// ---------- identify ----------
+const idf={size:null,hab:null,col:new Set()};
+function renderID(){
+  const v=document.getElementById("view-id");
+  const chips=(group,items,cur)=>items.map(([k,t,sw])=>`<button class="chip" data-g="${group}" data-k="${k}" aria-pressed="${group==='col'?idf.col.has(k):cur==k}">${sw?`<span class="swatch" style="background:${sw}"></span>`:""}${t}</button>`).join("");
+  let list=pool().filter(b=>(!idf.size||Math.abs(b.size-idf.size)<=0 )&&(!idf.hab||b.hab.includes(idf.hab)));
+  list=list.map(b=>({b,score:[...idf.col].filter(c=>b.col.includes(c)).length})).filter(x=>!idf.col.size||x.score>0)
+    .sort((a,z)=>z.score-a.score || (a.b.col.length-z.b.col.length) || a.b.n.localeCompare(z.b.n));
+  v.innerHTML=`<div class="filters">
+    <div class="group"><span class="label">How big?</span><div class="row">${chips("size",[[1,"Tiny"],[2,"Sparrow"],[3,"Robin"],[4,"Crow"],[5,"Larger"]],idf.size)}</div></div>
+    <div class="group"><span class="label">Where was it?</span><div class="row">${chips("hab",Object.entries(HAB_TXT),idf.hab)}</div></div>
+    <div class="group"><span class="label">Colors you noticed</span><div class="row">${chips("col",Object.keys(COLORS).map(k=>[k,k[0].toUpperCase()+k.slice(1),COLORS[k]]))}</div></div>
+    <div class="row" style="justify-content:space-between"><span class="note">${list.length} possible bird${list.length===1?"":"s"}</span><button class="chip" id="clr">Clear</button></div>
+  </div>
+  <div id="pick"></div>
+  <div class="results" style="margin-top:12px">${list.map(({b,score})=>`<button class="result" data-n="${b.n}">
+     <span class="mini">${pic(b,true)}</span>
+     <span class="rn">${b.n}<br><span class="rs">${SIZE_TXT[b.size].split(",")[0]} · ${b.hab.map(h=>HAB_TXT[h]).join(", ")}</span></span>
+     <span class="score">${idf.col.size?`${score}/${idf.col.size}`:""}</span></button>`).join("")
+     || `<p class="note">No match. Try removing a color or picking a size one step up or down.</p>`}</div>`;
+  v.querySelectorAll("[data-g]").forEach(c=>c.onclick=()=>{
+    const g=c.dataset.g,k=c.dataset.k;
+    if(g==="col"){idf.col.has(k)?idf.col.delete(k):idf.col.add(k)}
+    else if(g==="size"){idf.size=idf.size==k?null:+k}
+    else {idf.hab=idf.hab===k?null:k}
+    renderID();
+  });
+  hydrate(v);
+  v.querySelector("#clr").onclick=()=>{idf.size=null;idf.hab=null;idf.col.clear();renderID()};
+  v.querySelectorAll(".result").forEach(r=>r.onclick=()=>{
+    const b=B.find(x=>x.n===r.dataset.n);
+    const p=v.querySelector("#pick");
+    p.innerHTML=`<div class="card" style="margin-top:12px"><div class="plate">${pic(b)}</div><div class="card-body">${factsHTML(b)}${detailHTML(b)}<button class="btn ghost" id="closepick">Close</button></div></div>`;
+    hydrate(p);
+    p.querySelector("#closepick").onclick=()=>{p.innerHTML=""};
+    p.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+}
+
+// ---------- tabs ----------
+const views={cards:"view-cards",quiz:"view-quiz",id:"view-id"};
+function show(t){
+  Object.entries(views).forEach(([k,id])=>{document.getElementById(id).hidden=k!==t;document.getElementById("tab-"+k).setAttribute("aria-selected",k===t)});
+  store.set("tab",t);
+}
+Object.keys(views).forEach(k=>document.getElementById("tab-"+k).onclick=()=>show(k));
+document.getElementById("inSeason").onchange=()=>{newDeck();newQuiz();renderID()};
+newDeck(); newQuiz(); renderID();
+const hashTab = location.hash.replace("#","");
+show(views[hashTab]?hashTab:store.get("tab","cards"));
+</script>
+
+</body></html>
