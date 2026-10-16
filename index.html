@@ -484,7 +484,7 @@ function hydrate(root){
   root.querySelectorAll(".pic[data-n]").forEach(el=>{
     const b=B.find(x=>x.n===el.dataset.n); el.removeAttribute("data-n");
     getPhoto(b).then(p=>{ if(!p) return;
-      const img=new Image(); img.alt="Photo of a bird"; img.loading="lazy";
+      const img=new Image(); img.alt="Photo of a bird";
       img.onload=()=>{el.innerHTML=""; el.appendChild(img); const c=document.createElement("span"); c.className="credit"; c.textContent=p.a+" · iNaturalist"; el.appendChild(c);};
       img.src = el.dataset.small ? p.sq : p.m;
     });
