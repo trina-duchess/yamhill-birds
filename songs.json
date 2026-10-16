@@ -1,0 +1,958 @@
+{
+ "updated": "2026-10-16",
+ "birds": {
+  "Turdus migratorius": {
+   "song": {
+    "id": "1185925",
+    "type": "song",
+    "file": "https://xeno-canto.org/1185925/download",
+    "len": "2:57",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Portal, Arizona, United States"
+   },
+   "call": {
+    "id": "1185928",
+    "type": "call",
+    "file": "https://xeno-canto.org/1185928/download",
+    "len": "0:41",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "San Bernardino National Wildlife Refuge, Cochise County, Arizona, United States"
+   }
+  },
+  "Melospiza melodia": {
+   "song": {
+    "id": "1153739",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1153739/download",
+    "len": "0:52",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Barker Pass Rd-Blackwood Cyn, Placer County, California, United States"
+   },
+   "call": {
+    "id": "1074021",
+    "type": "call",
+    "file": "https://xeno-canto.org/1074021/download",
+    "len": "0:47",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Dungeness Recreation Area, Clallam County, Washington, United States"
+   }
+  },
+  "Pipilo maculatus": {
+   "song": {
+    "id": "1154309",
+    "type": "song",
+    "file": "https://xeno-canto.org/1154309/download",
+    "len": "3:50",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Surveyor Creek Trail, Deer Park Clearcut, Clallam County, Washington, United States"
+   },
+   "call": {
+    "id": "1180734",
+    "type": "call",
+    "file": "https://xeno-canto.org/1180734/download",
+    "len": "0:27",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Junco hyemalis": {
+   "song": {
+    "id": "1153566",
+    "type": "song",
+    "file": "https://xeno-canto.org/1153566/download",
+    "len": "0:28",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Upper Barker Pass Rd, Placer County, California, United States"
+   },
+   "call": {
+    "id": "1186354",
+    "type": "begging call, call",
+    "file": "https://xeno-canto.org/1186354/download",
+    "len": "1:01",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Port Angeles, Clallam County, Washington, United States"
+   }
+  },
+  "Poecile atricapillus": {
+   "song": {
+    "id": "1161644",
+    "type": "dawn song, song",
+    "file": "https://xeno-canto.org/1161644/download",
+    "len": "0:04",
+    "who": "rostratu",
+    "lic": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "where": "Rexburg (Madison MS - OFY) (near  Rexburg), Madison County, Idaho, United States"
+   },
+   "call": {
+    "id": "1100535",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1100535/download",
+    "len": "2:33",
+    "who": "Jim Berry",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "City of Jamestown, Chautauqua County, New York, United States"
+   }
+  },
+  "Psaltriparus minimus": {
+   "song": {
+    "id": "417736",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/417736/download",
+    "len": "0:19",
+    "who": "Paula Caycedo &amp; Mitch Covington",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Grand Canyon Village, Coconino County, Arizona, United States"
+   },
+   "call": {
+    "id": "1024967",
+    "type": "call",
+    "file": "https://xeno-canto.org/1024967/download",
+    "len": "0:47",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Dungeness Trails, Sequim, Clallam County, Washington, United States"
+   }
+  },
+  "Thryomanes bewickii": {
+   "song": {
+    "id": "1139582",
+    "type": "song",
+    "file": "https://xeno-canto.org/1139582/download",
+    "len": "1:21",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Elk Mtn Rd, Lake County, California, United States"
+   },
+   "call": {
+    "id": "1103027",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1103027/download",
+    "len": "5:35",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Blue Ridge Road, Solano County, California, United States"
+   }
+  },
+  "Cyanocitta stelleri": {
+   "song": {
+    "id": "603263",
+    "type": "song",
+    "file": "https://xeno-canto.org/603263/download",
+    "len": "0:24",
+    "who": "Thomas Magarian",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Camp Polk Meadow Preserve, Sisters, Deschutes County, Oregon, United States"
+   },
+   "call": {
+    "id": "1056036",
+    "type": "call",
+    "file": "https://xeno-canto.org/1056036/download",
+    "len": "0:04",
+    "who": "Denis Dujardin",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Cloverdale, Tillamook County, Oregon, United States"
+   }
+  },
+  "Aphelocoma californica": {
+   "song": {
+    "id": "577039",
+    "type": "song, subsong",
+    "file": "https://xeno-canto.org/577039/download",
+    "len": "0:31",
+    "who": "Andy Birch",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Los Angeles, Los Angeles County, California, United States"
+   },
+   "call": {
+    "id": "914678",
+    "type": "call",
+    "file": "https://xeno-canto.org/914678/download",
+    "len": "1:06",
+    "who": "Bobby Wilcox",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Apple Orchard Spring, Washoe County, Nevada, United States"
+   }
+  },
+  "Corvus brachyrhynchos": {
+   "song": {
+    "id": "984442",
+    "type": "begging call, subsong",
+    "file": "https://xeno-canto.org/984442/download",
+    "len": "1:27",
+    "who": "Jonathan Thomas",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Royse City, Collin County, Texas, United States"
+   },
+   "call": {
+    "id": "1172881",
+    "type": "begging call, call",
+    "file": "https://xeno-canto.org/1172881/download",
+    "len": "0:57",
+    "who": "Rachel Thurman",
+    "lic": "https://creativecommons.org/licenses/by/4.0/",
+    "where": "Stephen Richards Memorial Drive and Mendenhall Loop Road (near  Juneau), Juneau City and Borough, Alaska, United States"
+   }
+  },
+  "Colaptes auratus": {
+   "song": {
+    "id": "1007124",
+    "type": "song",
+    "file": "https://xeno-canto.org/1007124/download",
+    "len": "0:26",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Dean's Crick, Sierra County, California, United States"
+   },
+   "call": {
+    "id": "1148842",
+    "type": "call",
+    "file": "https://xeno-canto.org/1148842/download",
+    "len": "1:02",
+    "who": "Manuel Sánchez-Nivicela",
+    "lic": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "where": "Central Park, New York County, New York, United States"
+   }
+  },
+  "Dryobates pubescens": {
+   "song": {
+    "id": "542747",
+    "type": "song",
+    "file": "https://xeno-canto.org/542747/download",
+    "len": "0:04",
+    "who": "William Whitehead",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Hawk Rise Sanctuary (near  Linden), Union County, New Jersey, United States"
+   },
+   "call": {
+    "id": "1165447",
+    "type": "call",
+    "file": "https://xeno-canto.org/1165447/download",
+    "len": "0:12",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Calypte anna": {
+   "song": {
+    "id": "1083908",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1083908/download",
+    "len": "0:39",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Dungeness Recreation Area, Clallam County, Washington, United States"
+   },
+   "call": {
+    "id": "1080235",
+    "type": "call, Dive-sound",
+    "file": "https://xeno-canto.org/1080235/download",
+    "len": "0:23",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Dungeness Recreation Area, Clallam County, Washington, United States"
+   }
+  },
+  "Sitta canadensis": {
+   "song": {
+    "id": "1029989",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1029989/download",
+    "len": "2:30",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Hog Ranch Road (near Wenas / Cascade Camp), Kittitas County, Washington, United States"
+   },
+   "call": {
+    "id": "1183802",
+    "type": "call",
+    "file": "https://xeno-canto.org/1183802/download",
+    "len": "0:18",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Sitta carolinensis": {
+   "song": {
+    "id": "1094766",
+    "type": "song",
+    "file": "https://xeno-canto.org/1094766/download",
+    "len": "1:23",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Irish Hill Rd, Amador County, California, United States"
+   },
+   "call": {
+    "id": "1038731",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1038731/download",
+    "len": "4:54",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Portal, Arizona, United States"
+   }
+  },
+  "Haemorhous mexicanus": {
+   "song": {
+    "id": "1148298",
+    "type": "song",
+    "file": "https://xeno-canto.org/1148298/download",
+    "len": "0:06",
+    "who": "Pat Goltz",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Catalina State Park, Pima County, Arizona, United States"
+   },
+   "call": {
+    "id": "941232",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/941232/download",
+    "len": "2:13",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "San Bernardino National Wildlife Refuge, Cochise County, Arizona, United States"
+   }
+  },
+  "Spinus tristis": {
+   "song": {
+    "id": "1090062",
+    "type": "song",
+    "file": "https://xeno-canto.org/1090062/download",
+    "len": "0:41",
+    "who": "Manuel Grosselet",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Moss Landing, Monterey County, California, United States"
+   },
+   "call": {
+    "id": "1175779",
+    "type": "call",
+    "file": "https://xeno-canto.org/1175779/download",
+    "len": "0:49",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Spinus psaltria": {
+   "song": {
+    "id": "1056078",
+    "type": "song",
+    "file": "https://xeno-canto.org/1056078/download",
+    "len": "0:14",
+    "who": "Denis Dujardin",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "SW Harrison Street (near  Portland), Multnomah County, Oregon, United States"
+   },
+   "call": {
+    "id": "1005092",
+    "type": "call",
+    "file": "https://xeno-canto.org/1005092/download",
+    "len": "1:26",
+    "who": "Paul Marvin",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Sloane Canyon Rd, San Diego County, California, United States"
+   }
+  },
+  "Sturnus vulgaris": {
+   "song": {
+    "id": "1101346",
+    "type": "song",
+    "file": "https://xeno-canto.org/1101346/download",
+    "len": "0:48",
+    "who": "Manuel Grosselet",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Papago Park, Phoenix, Maricopa County, Arizona, United States"
+   },
+   "call": {
+    "id": "1065863",
+    "type": "call, imitation, song",
+    "file": "https://xeno-canto.org/1065863/download",
+    "len": "4:10",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "3 Crabs Road, Clallam County, Washington, United States"
+   }
+  },
+  "Agelaius phoeniceus": {
+   "song": {
+    "id": "1148215",
+    "type": "song",
+    "file": "https://xeno-canto.org/1148215/download",
+    "len": "0:35",
+    "who": "Pat Goltz",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Sweetwater Wetlands Park (near  Tucson), Pima County, Arizona, United States"
+   },
+   "call": {
+    "id": "1089594",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1089594/download",
+    "len": "0:31",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Deer Creek Hills Preserve, Sacramento County, California, United States"
+   }
+  },
+  "Euphagus cyanocephalus": {
+   "song": {
+    "id": "764039",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/764039/download",
+    "len": "4:08",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Las Cienegas National Conservation Area (Empire Gulch), Pima County, Arizona, United States"
+   },
+   "call": {
+    "id": "1040465",
+    "type": "call",
+    "file": "https://xeno-canto.org/1040465/download",
+    "len": "0:22",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Jameson Lake, Waterville, Douglas County, Washington, United States"
+   }
+  },
+  "Zenaida macroura": {
+   "song": {
+    "id": "1133528",
+    "type": "song",
+    "file": "https://xeno-canto.org/1133528/download",
+    "len": "3:21",
+    "who": "Jim Berry",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Harmony (near  Panama), Chautauqua County, New York, United States"
+   },
+   "call": {
+    "id": "691623",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/691623/download",
+    "len": "1:15",
+    "who": "Christopher McPherson",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Beaver Brook Great Meadow, Hollis, Hillsborough County, New Hampshire, United States"
+   }
+  },
+  "Streptopelia decaocto": {
+   "song": {
+    "id": "936984",
+    "type": "song",
+    "file": "https://xeno-canto.org/936984/download",
+    "len": "0:59",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Portal, Arizona, United States"
+   },
+   "call": {
+    "id": "936982",
+    "type": "flight call, song, wingbeats of flight display",
+    "file": "https://xeno-canto.org/936982/download",
+    "len": "0:45",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Portal, Arizona, United States"
+   }
+  },
+  "Buteo jamaicensis": {
+   "song": {
+    "id": "1090861",
+    "type": "song",
+    "file": "https://xeno-canto.org/1090861/download",
+    "len": "0:05",
+    "who": "Manuel Grosselet",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Salinas, Monterey County, California, United States"
+   },
+   "call": {
+    "id": "1033919",
+    "type": "call",
+    "file": "https://xeno-canto.org/1033919/download",
+    "len": "0:30",
+    "who": "Rory Nefdt",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Hart’s Brook Park and Preserve (near  Hartsdale), Westchester County, New York, United States"
+   }
+  },
+  "Falco sparverius": {
+   "call": {
+    "id": "1028819",
+    "type": "call",
+    "file": "https://xeno-canto.org/1028819/download",
+    "len": "4:59",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Wenas Campground, WA, United States"
+   }
+  },
+  "Haliaeetus leucocephalus": {
+   "song": {
+    "id": "1060048",
+    "type": "song",
+    "file": "https://xeno-canto.org/1060048/download",
+    "len": "0:11",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Dungeness Recreation Area, Clallam County, Washington, United States"
+   },
+   "call": {
+    "id": "1163370",
+    "type": "call",
+    "file": "https://xeno-canto.org/1163370/download",
+    "len": "0:12",
+    "who": "Rachel Thurman",
+    "lic": "https://creativecommons.org/licenses/by/4.0/",
+    "where": "Riverside Rotary Park (near  Juneau), Juneau City and Borough, Alaska, United States"
+   }
+  },
+  "Cathartes aura": {
+   "call": {
+    "id": "381486",
+    "type": "call",
+    "file": "https://xeno-canto.org/381486/download",
+    "len": "2:32",
+    "who": "Andrew Spencer",
+    "lic": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "where": "near Trumansburg, Tompkins County, New York, United States"
+   }
+  },
+  "Pandion haliaetus": {
+   "song": {
+    "id": "369949",
+    "type": "song",
+    "file": "https://xeno-canto.org/369949/download",
+    "len": "1:08",
+    "who": "Nick Komar",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Laramie River Road, Larimer County, Colorado, United States"
+   },
+   "call": {
+    "id": "1027115",
+    "type": "begging call",
+    "file": "https://xeno-canto.org/1027115/download",
+    "len": "1:35",
+    "who": "Paul Driver",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Brigantine National Wildlife Refuge, NJ, United States"
+   }
+  },
+  "Ardea herodias": {
+   "song": {
+    "id": "419194",
+    "type": "flight song",
+    "file": "https://xeno-canto.org/419194/download",
+    "len": "0:16",
+    "who": "Sue Riffe",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Lower Latham, Weld County, Colorado, United States"
+   },
+   "call": {
+    "id": "1040454",
+    "type": "call",
+    "file": "https://xeno-canto.org/1040454/download",
+    "len": "0:10",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Jameson Lake, Waterville, Douglas County, Washington, United States"
+   }
+  },
+  "Anas platyrhynchos": {
+   "song": {
+    "id": "773331",
+    "type": "call, duet, song",
+    "file": "https://xeno-canto.org/773331/download",
+    "len": "1:40",
+    "who": "William Whitehead",
+    "lic": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "where": "Rahway River Park (near  Rahway), Union County, New Jersey, United States"
+   },
+   "call": {
+    "id": "1034784",
+    "type": "call, long call",
+    "file": "https://xeno-canto.org/1034784/download",
+    "len": "3:25",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "San Simon Cienega, Cochise County, Arizona, United States"
+   }
+  },
+  "Branta canadensis": {
+   "song": {
+    "id": "840131",
+    "type": "song",
+    "file": "https://xeno-canto.org/840131/download",
+    "len": "0:10",
+    "who": "murcraya@gmail.com",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Logan Utah, United States"
+   },
+   "call": {
+    "id": "1048810",
+    "type": "call",
+    "file": "https://xeno-canto.org/1048810/download",
+    "len": "0:10",
+    "who": "AUDEVARD Aurélien",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Anchorage, Anchorage Municipality, Alaska, United States"
+   }
+  },
+  "Branta hutchinsii": {
+   "call": {
+    "id": "1046935",
+    "type": "call, flight call",
+    "file": "https://xeno-canto.org/1046935/download",
+    "len": "0:51",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Graysmarsh (near Sequim), Clallam County, Washington, United States"
+   }
+  },
+  "Charadrius vociferus": {
+   "song": {
+    "id": "1146761",
+    "type": "song",
+    "file": "https://xeno-canto.org/1146761/download",
+    "len": "0:20",
+    "who": "Rory Nefdt",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Flag Ponds Nature Park Delaware, United States"
+   },
+   "call": {
+    "id": "1056017",
+    "type": "call",
+    "file": "https://xeno-canto.org/1056017/download",
+    "len": "0:03",
+    "who": "Denis Dujardin",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Tualatin River NWR, Washington County, Oregon, United States"
+   }
+  },
+  "Sturnella neglecta": {
+   "song": {
+    "id": "1145456",
+    "type": "song",
+    "file": "https://xeno-canto.org/1145456/download",
+    "len": "1:23",
+    "who": "Michael Collins",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Billings, Yellowstone County, Montana, United States"
+   },
+   "call": {
+    "id": "914677",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/914677/download",
+    "len": "1:09",
+    "who": "Bobby Wilcox",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Apple Orchard Spring, Washoe County, Nevada, United States"
+   }
+  },
+  "Bombycilla cedrorum": {
+   "song": {
+    "id": "1142128",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1142128/download",
+    "len": "0:19",
+    "who": "Rory Nefdt",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Croton Point Park, Croton, New York, United States"
+   },
+   "call": {
+    "id": "1177761",
+    "type": "begging call, call",
+    "file": "https://xeno-canto.org/1177761/download",
+    "len": "0:21",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Upper Fish Hatchery Road, Sequim, Clallam County, Washington, United States"
+   }
+  },
+  "Dryocopus pileatus": {
+   "song": {
+    "id": "351542",
+    "type": "song",
+    "file": "https://xeno-canto.org/351542/download",
+    "len": "0:03",
+    "who": "Melani Sleder",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Massachusetts (near Concord), Middlesex County, Massachusetts, United States"
+   },
+   "call": {
+    "id": "952718",
+    "type": "call, flight call",
+    "file": "https://xeno-canto.org/952718/download",
+    "len": "3:27",
+    "who": "Valerie Heemstra",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Bark River Township (near  Bark River), Delta County, Michigan, United States"
+   }
+  },
+  "Megaceryle alcyon": {
+   "song": {
+    "id": "600420",
+    "type": "song",
+    "file": "https://xeno-canto.org/600420/download",
+    "len": "0:15",
+    "who": "William Whitehead",
+    "lic": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "where": "Ernest Oros Nature Preserve, Avenel, New Jersey, United States"
+   },
+   "call": {
+    "id": "1135356",
+    "type": "call",
+    "file": "https://xeno-canto.org/1135356/download",
+    "len": "0:02",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Zonotrichia atricapilla": {
+   "song": {
+    "id": "1173335",
+    "type": "song",
+    "file": "https://xeno-canto.org/1173335/download",
+    "len": "1:21",
+    "who": "Anne McCormack",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Nome Census Area, Alaska, United States"
+   },
+   "call": {
+    "id": "1068836",
+    "type": "call",
+    "file": "https://xeno-canto.org/1068836/download",
+    "len": "0:23",
+    "who": "Benjamin Drillat",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Nome, Nome Census Area, Alaska, United States"
+   }
+  },
+  "Zonotrichia leucophrys": {
+   "song": {
+    "id": "1151439",
+    "type": "song",
+    "file": "https://xeno-canto.org/1151439/download",
+    "len": "0:08",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   },
+   "call": {
+    "id": "1183609",
+    "type": "call",
+    "file": "https://xeno-canto.org/1183609/download",
+    "len": "0:14",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Passerella iliaca": {
+   "song": {
+    "id": "1101580",
+    "type": "song",
+    "file": "https://xeno-canto.org/1101580/download",
+    "len": "0:32",
+    "who": "Valerie Heemstra",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Cedarville Township (near  Cedar River), Menominee County, Michigan, United States"
+   },
+   "call": {
+    "id": "1071126",
+    "type": "call, flight call",
+    "file": "https://xeno-canto.org/1071126/download",
+    "len": "1:04",
+    "who": "Noah Khanti Steinberg",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Gainesville, Alachua County, Florida, United States"
+   }
+  },
+  "Ixoreus naevius": {
+   "song": {
+    "id": "1048897",
+    "type": "song",
+    "file": "https://xeno-canto.org/1048897/download",
+    "len": "0:27",
+    "who": "AUDEVARD Aurélien",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Homer, Kenai Peninsula Borough, Alaska, United States"
+   },
+   "call": {
+    "id": "1048896",
+    "type": "alarm call, call",
+    "file": "https://xeno-canto.org/1048896/download",
+    "len": "0:14",
+    "who": "AUDEVARD Aurélien",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Homer, Kenai Peninsula Borough, Alaska, United States"
+   }
+  },
+  "Corthylio calendula": {
+   "song": {
+    "id": "1034775",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1034775/download",
+    "len": "4:18",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "San Bernardino National Wildlife Refuge, Cochise County, Arizona, United States"
+   },
+   "call": {
+    "id": "1080778",
+    "type": "call",
+    "file": "https://xeno-canto.org/1080778/download",
+    "len": "0:24",
+    "who": "Scott Olmstead",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Rock Corral Canyon, Santa Cruz County, Arizona, United States"
+   }
+  },
+  "Setophaga coronata": {
+   "song": {
+    "id": "1141315",
+    "type": "song",
+    "file": "https://xeno-canto.org/1141315/download",
+    "len": "0:38",
+    "who": "Scott Olmstead",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Pearl Lake Rd, Lisbon, Grafton County, New Hampshire, United States"
+   },
+   "call": {
+    "id": "780788",
+    "type": "call",
+    "file": "https://xeno-canto.org/780788/download",
+    "len": "0:29",
+    "who": "Paul Driver",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "J.N. \"Ding\" Darling National Wildlife Refuge (near  Sanibel), Lee County, Florida, United States"
+   }
+  },
+  "Pheucticus melanocephalus": {
+   "song": {
+    "id": "1150136",
+    "type": "song",
+    "file": "https://xeno-canto.org/1150136/download",
+    "len": "1:21",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Upper Fish Hatchery Road, Sequim, Clallam County, Washington, United States"
+   },
+   "call": {
+    "id": "1143406",
+    "type": "call",
+    "file": "https://xeno-canto.org/1143406/download",
+    "len": "0:10",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Upper Fish Hatchery Road, Sequim, Clallam County, Washington, United States"
+   }
+  },
+  "Piranga ludoviciana": {
+   "song": {
+    "id": "1145933",
+    "type": "song",
+    "file": "https://xeno-canto.org/1145933/download",
+    "len": "2:07",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "NF Road 2870, Sequim, Clallam County, Washington, United States"
+   },
+   "call": {
+    "id": "1149134",
+    "type": "call",
+    "file": "https://xeno-canto.org/1149134/download",
+    "len": "0:09",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  },
+  "Tachycineta thalassina": {
+   "song": {
+    "id": "678660",
+    "type": "dawn song",
+    "file": "https://xeno-canto.org/678660/download",
+    "len": "9:13",
+    "who": "Richard E. Webster",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Hannagan Meadow region, Greenlee County, Arizona, United States"
+   },
+   "call": {
+    "id": "1015411",
+    "type": "call",
+    "file": "https://xeno-canto.org/1015411/download",
+    "len": "2:14",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "ODT Access - Runnion & Sawmill, Sequim, Clallam County, Washington, United States"
+   }
+  },
+  "Hirundo rustica": {
+   "song": {
+    "id": "779619",
+    "type": "dawn song",
+    "file": "https://xeno-canto.org/779619/download",
+    "len": "1:03",
+    "who": "Paul Marvin",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Patagonia, Santa Cruz County, Arizona, United States"
+   },
+   "call": {
+    "id": "1011825",
+    "type": "call",
+    "file": "https://xeno-canto.org/1011825/download",
+    "len": "1:08",
+    "who": "Greg Irving",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "ODT Access - Runnion & Sawmill, Sequim, Clallam County, Washington, United States"
+   }
+  },
+  "Selasphorus rufus": {
+   "song": {
+    "id": "495185",
+    "type": "call, song, chips, wing sounds",
+    "file": "https://xeno-canto.org/495185/download",
+    "len": "1:34",
+    "who": "Thomas G. Graves",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Rocky Mountains (near  Tererro), San Miguel County, New Mexico, United States"
+   },
+   "call": {
+    "id": "581028",
+    "type": "call, shuttle display, wing whirr",
+    "file": "https://xeno-canto.org/581028/download",
+    "len": "0:23",
+    "who": "Eric DeFonso",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Twin Spruce Rd area, Jefferson County, Colorado, United States"
+   }
+  },
+  "Catharus ustulatus": {
+   "song": {
+    "id": "1153740",
+    "type": "song",
+    "file": "https://xeno-canto.org/1153740/download",
+    "len": "0:28",
+    "who": "Ed Pandolfino",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "Barker Pass Rd-Blackwood Cyn, Placer County, California, United States"
+   },
+   "call": {
+    "id": "1165426",
+    "type": "call",
+    "file": "https://xeno-canto.org/1165426/download",
+    "len": "0:18",
+    "who": "Don Profota",
+    "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "where": "South Bozeman, Gallatin County, Montana, United States"
+   }
+  }
+ }
+}
