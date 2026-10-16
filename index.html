@@ -158,7 +158,7 @@ const B = [
   marks:"Bold white eyebrow, plain brown back, clean grayish-white underparts. Long tail flicked side to side.",
   sound:"Varied, bright song: a few buzzy notes then a trill. Scolds with a harsh buzz.",
   c:{crown:"#6b4c3a",face:"#d8d2c6",throat:"#f2efe8",breast:"#e9e6df",belly:"#ddd8cf",back:"#6b4c3a",wing:"#6b4c3a",tail:"#5a4a40",bill:"#333"},f:{eyebrow:"#ffffff",longtail:true,longbill:true}},
- {n:"Steller's Jay",s:"Cyanocitta stelleri",shape:"song",size:4,season:"year",hab:["woods","yard"],col:["blue","black"],
+ {n:"Steller's Jay",s:"Cyanocitta stelleri",shape:"song",size:4,season:"year",hab:["woods","yard","air"],col:["blue","black"],
   marks:"Tall black crest and head, deep blue body and wings. Bold and noisy around conifers.",
   sound:"Harsh 'shook-shook-shook' or 'shack-shack'. Also imitates Red-tailed Hawks.",
   c:{crown:"#121a2a",face:"#121a2a",throat:"#1d2433",breast:"#2c3e6b",belly:"#2a5aa0",back:"#23324f",wing:"#1f4fa0",tail:"#1e4ea0",bill:"#111"},f:{crest:true}},
@@ -166,7 +166,7 @@ const B = [
   marks:"Blue head, wings and tail, gray-brown back, white throat with a blue necklace. No crest.",
   sound:"Harsh, rising 'shreeep', often repeated. Loud around oaks and yards.",
   c:{crown:"#3b6fb5",face:"#4a5568",throat:"#ece9e2",breast:"#c9cbd0",belly:"#d9d6cf",back:"#8a8a84",wing:"#3b6fb5",tail:"#3b6fb5",bill:"#111"},f:{bands:"#3b6fb5"}},
- {n:"American Crow",s:"Corvus brachyrhynchos",shape:"song",size:4,season:"year",hab:["yard","field"],col:["black"],
+ {n:"American Crow",s:"Corvus brachyrhynchos",shape:"song",size:4,season:"year",hab:["yard","field","air"],col:["black"],
   marks:"All black including bill and legs. Square-ended tail in flight. Often in groups.",
   sound:"The familiar 'caw-caw'. Also rattles and clicks.",
   c:{crown:"#141414",face:"#141414",throat:"#141414",breast:"#161616",belly:"#181818",back:"#141414",wing:"#101010",tail:"#121212",bill:"#111"},f:{}},
@@ -202,19 +202,19 @@ const B = [
   marks:"Smaller than American Goldfinch. Olive-green back, yellow underparts, black cap and a white wing patch.",
   sound:"Plaintive, rising 'tee-yee'. Song mixes in imitations of other birds.",
   c:{crown:"#111",face:"#5a6a1a",throat:"#f0d000",breast:"#f0d000",belly:"#f0d000",back:"#5a6a1a",wing:"#111",wingbar:"#ffffff",tail:"#111",bill:"#555"},f:{}},
- {n:"European Starling",s:"Sturnus vulgaris",shape:"song",size:3,season:"year",hab:["yard","field"],col:["black"],
+ {n:"European Starling",s:"Sturnus vulgaris",shape:"song",size:3,season:"year",hab:["yard","field","air"],col:["black"],
   marks:"Chunky, short-tailed, glossy black. Covered in white spots in fall and winter. Triangle-shaped wings in flight.",
   sound:"Whistles, clicks, rattles and imitations of other birds.",
   c:{crown:"#1e1e24",face:"#1e1e24",throat:"#20202a",breast:"#22222a",belly:"#24242c",back:"#1e1e24",wing:"#1a1a20",tail:"#1a1a20",bill:"#3a3a3a"},f:{spots:"all",shorttail:true,longbill:true}},
- {n:"Red-winged Blackbird",s:"Agelaius phoeniceus",shape:"song",size:3,season:"year",hab:["water","field"],col:["black","red"],
+ {n:"Red-winged Blackbird",s:"Agelaius phoeniceus",shape:"song",size:3,season:"year",hab:["water","field","air"],col:["black","red"],
   marks:"Males are all black with red-and-yellow shoulder patches. Females look like large, heavily streaked brown sparrows.",
   sound:"Gurgling 'conk-la-reee' from cattails and fence posts.",
   c:{crown:"#111",face:"#111",throat:"#111",breast:"#111",belly:"#141414",back:"#111",wing:"#111",wingbar:"#d62828",tail:"#111",bill:"#111"},f:{epaulet:true}},
- {n:"Brewer's Blackbird",s:"Euphagus cyanocephalus",shape:"song",size:3,season:"year",hab:["field","yard"],col:["black"],
+ {n:"Brewer's Blackbird",s:"Euphagus cyanocephalus",shape:"song",size:3,season:"year",hab:["field","yard","air"],col:["black"],
   marks:"Males glossy black with a pale yellow eye. Females plain gray-brown with a dark eye. Walks around parking lots and fields.",
   sound:"Short creaky 'tsheee' and a sharp 'check'.",
   c:{crown:"#1a1a26",face:"#1a1a26",throat:"#1a1a26",breast:"#1c1c28",belly:"#1e1e2a",back:"#1a1a26",wing:"#16162a",tail:"#16162a",bill:"#111"},f:{eye:"#f2e98a"}},
- {n:"Mourning Dove",s:"Zenaida macroura",shape:"song",size:3,season:"year",hab:["yard","field"],col:["brown","gray"],
+ {n:"Mourning Dove",s:"Zenaida macroura",shape:"song",size:3,season:"year",hab:["yard","field","air"],col:["brown","gray"],
   marks:"Slim, soft tan-gray with black spots on the wings and a long pointed tail. Wings whistle on takeoff.",
   sound:"Slow, mournful 'coo-OO-oo, oo, oo'.",
   c:{crown:"#a8a0a0",face:"#c8b8a4",throat:"#d8c4ae",breast:"#cdb49a",belly:"#d8c6b0",back:"#a8957e",wing:"#a8957e",tail:"#9a8a7a",bill:"#333"},f:{wingspots:"#222",longtail:true,smallhead:true}},
@@ -226,7 +226,7 @@ const B = [
   marks:"Brown back, pale breast with a dark streaky belly band, brick-red tail on adults. Perches on poles along highways.",
   sound:"Hoarse, falling scream 'kee-eeeer'. The hawk sound used in movies.",
   c:{crown:"#6b4a32",face:"#6b4a32",throat:"#f0e8dc",breast:"#f2ebe0",belly:"#f2ebe0",back:"#5e4030",wing:"#5e4030",tail:"#b5522e",bill:"#333"},f:{streaks:"belly"}},
- {n:"American Kestrel",s:"Falco sparverius",shape:"raptor",size:3,season:"year",hab:["field"],col:["orange","blue","white","black"],
+ {n:"American Kestrel",s:"Falco sparverius",shape:"raptor",size:3,season:"year",hab:["field","air"],col:["orange","blue","white","black"],
   marks:"Small falcon. Rusty back and tail, blue-gray wings on males, two black stripes on a white face. Hovers over fields and perches on wires.",
   sound:"Rapid 'klee-klee-klee'.",
   c:{crown:"#6a7fa8",face:"#f2efe8",throat:"#f5f2ea",breast:"#e8c49a",belly:"#f0dcc0",back:"#c2643a",wing:"#6a7fa8",tail:"#c2643a",bill:"#333"},f:{spots:"belly",mustache:"#111"}},
@@ -242,23 +242,23 @@ const B = [
   marks:"Dark brown above, white below, with a dark stripe through the eye. Wings bent like a gull's. Nests on platforms along rivers.",
   sound:"Series of high, whistled 'chewk' notes.",
   c:{crown:"#fafafa",face:"#fafafa",throat:"#fafafa",breast:"#fafafa",belly:"#fafafa",back:"#3a2a1e",wing:"#3a2a1e",tail:"#4a3a2e",bill:"#222"},f:{eyeline:"#3a2a1e",streaks:"breast",eye:"#e8c020"}},
- {n:"Great Blue Heron",s:"Ardea herodias",shape:"wader",size:5,season:"year",hab:["water","field"],col:["gray","blue","white"],
+ {n:"Great Blue Heron",s:"Ardea herodias",shape:"wader",size:5,season:"year",hab:["water","field","air"],col:["gray","blue","white"],
   marks:"Very tall blue-gray heron with a dagger bill and a black plume over the eye. Flies with neck tucked in an S. Hunts voles in fields too.",
   sound:"Deep, hoarse croak: 'fraaahnk'.",
   c:{crown:"#f2f2f0",face:"#f2f2f0",throat:"#e8e8e4",breast:"#8a98a6",belly:"#6a7a8a",back:"#7a8ca0",wing:"#6a7c90",tail:"#6a7c90",bill:"#e0b030"},f:{plume:"#111"}},
- {n:"Mallard",s:"Anas platyrhynchos",shape:"water",size:5,season:"year",hab:["water"],col:["green","brown","gray"],
+ {n:"Mallard",s:"Anas platyrhynchos",shape:"water",size:5,season:"year",hab:["water","air"],col:["green","brown","gray"],
   marks:"Males have a glossy green head, white neck ring and chestnut breast. Females are mottled brown with an orange-and-black bill. Both show a blue wing patch.",
   sound:"Females give the classic loud 'quack-quack-quack'. Males are quieter and raspy.",
   c:{crown:"#1a6a3a",face:"#1a6a3a",throat:"#1a6a3a",neck:"#1a6a3a",breast:"#6a3a2a",belly:"#c8c8c4",back:"#8a8a84",wing:"#6a6a64",wingbar:"#2a4ab0",tail:"#111",bill:"#e8d040"},f:{ring:"#ffffff"}},
- {n:"Canada Goose",s:"Branta canadensis",shape:"water",size:5,season:"year",hab:["water","field"],col:["black","brown","white"],
+ {n:"Canada Goose",s:"Branta canadensis",shape:"water",size:5,season:"year",hab:["water","field","air"],col:["black","brown","white"],
   marks:"Large goose with a long black neck and a white chinstrap. Grazes on lawns and fields.",
   sound:"Deep, two-part honk: 'ha-ronk'.",
   c:{crown:"#111",face:"#111",throat:"#f5f5f2",neck:"#111",breast:"#c8bca8",belly:"#e8e2d8",back:"#7a6a58",wing:"#6a5a4a",tail:"#111",bill:"#111"},f:{chinstrap:true}},
- {n:"Cackling Goose",s:"Branta hutchinsii",shape:"water",size:4,season:"winter",hab:["field","water"],col:["black","brown","white"],
+ {n:"Cackling Goose",s:"Branta hutchinsii",shape:"water",size:4,season:"winter",hab:["field","water","air"],col:["black","brown","white"],
   marks:"Looks like a small Canada Goose with a stubby bill, short neck and darker breast. Huge winter flocks feed in Willamette Valley grass fields.",
   sound:"High-pitched yelping 'luk-luk', much higher than Canada Goose.",
   c:{crown:"#111",face:"#111",throat:"#f5f5f2",neck:"#111",breast:"#8a7a68",belly:"#d8d0c4",back:"#6a5a4a",wing:"#5a4a3c",tail:"#111",bill:"#111"},f:{chinstrap:true,stubby:true}},
- {n:"Killdeer",s:"Charadrius vociferus",shape:"song",size:3,season:"year",hab:["field"],col:["brown","white","black","orange"],
+ {n:"Killdeer",s:"Charadrius vociferus",shape:"song",size:3,season:"year",hab:["field","air"],col:["brown","white","black","orange"],
   marks:"Brown back, white below with two black breast bands, orange rump in flight. Fakes a broken wing to lure you away from its nest.",
   sound:"Shrill, endlessly repeated 'kill-deer, kill-deer'.",
   c:{crown:"#8a6a4a",face:"#fafafa",throat:"#fafafa",breast:"#fafafa",belly:"#fafafa",back:"#8a6a4a",wing:"#8a6a4a",tail:"#c87a3a",bill:"#111"},f:{bands:"#111",double:true,legs:true}},
@@ -274,7 +274,7 @@ const B = [
   marks:"Crow-sized black woodpecker with a flaming red crest and a white face stripe. Leaves big rectangular holes in trees.",
   sound:"Wild, ringing 'kuk-kuk-kuk-kuk'. Slow, heavy drumming.",
   c:{crown:"#d81b1b",face:"#111",throat:"#f5f5f2",breast:"#111",belly:"#111",back:"#111",wing:"#111",tail:"#111",bill:"#333"},f:{crest:true,eyebrow:"#f5f5f2",longbill:true}},
- {n:"Belted Kingfisher",s:"Megaceryle alcyon",shape:"song",size:4,season:"year",hab:["water"],col:["blue","white","orange"],
+ {n:"Belted Kingfisher",s:"Megaceryle alcyon",shape:"song",size:4,season:"year",hab:["water","air"],col:["blue","white","orange"],
   marks:"Big shaggy-crested head, blue-gray back, white collar and a blue breast band. Females add a rusty belly band. Dives for fish.",
   sound:"Loud, dry rattle as it flies along streams.",
   c:{crown:"#4a6a8a",face:"#4a6a8a",throat:"#fafafa",breast:"#4a6a8a",belly:"#fafafa",back:"#4a6a8a",wing:"#3a5a7a",tail:"#3a5a7a",bill:"#222"},f:{crest:true,longbill:true,bighead:true}},
@@ -336,7 +336,7 @@ const isSummer = m => m>=3 && m<=8;   // Apr–Sep
 const here = b => b.season==="year" || (b.season==="winter" && isWinter(MONTH)) || (b.season==="summer" && isSummer(MONTH));
 const SEASON_TXT = {year:"Here all year", winter:"Winter visitor, Oct–Apr", summer:"Summer visitor, Apr–Sep"};
 const SIZE_TXT = ["","Tiny, under 5 in","Sparrow-size, 5–7 in","Robin-size, 8–11 in","Crow-size, 12–20 in","Large, over 20 in"];
-const HAB_TXT = {yard:"Yards & feeders",woods:"Woods",field:"Open fields",water:"Water & wetlands",air:"Usually flying"};
+const HAB_TXT = {yard:"Yards & feeders",woods:"Woods",field:"Open fields",water:"Water & wetlands",air:"Flying overhead"};
 const COLORS = {black:"#1a1a1a",white:"#f5f5f2",gray:"#8f949a",brown:"#7a5a40",red:"#c6283a",orange:"#d8862e",yellow:"#f2d22a",blue:"#2f5fb0",green:"#3e7a4a"};
 
 (function(){
@@ -630,21 +630,26 @@ const idf={size:null,hab:null,col:new Set()};
 function renderID(){
   const v=document.getElementById("view-id");
   const chips=(group,items,cur)=>items.map(([k,t,sw])=>`<button class="chip" data-g="${group}" data-k="${k}" aria-pressed="${group==='col'?idf.col.has(k):cur==k}">${sw?`<span class="swatch" style="background:${sw}"></span>`:""}${t}</button>`).join("");
-  let list=pool().filter(b=>(!idf.size||Math.abs(b.size-idf.size)<=0 )&&(!idf.hab||b.hab.includes(idf.hab)));
-  list=list.map(b=>({b,score:[...idf.col].filter(c=>b.col.includes(c)).length})).filter(x=>!idf.col.size||x.score>0)
+  // Size matches its class or one step either way; place and colors raise the ranking instead of hiding birds.
+  let list=pool().filter(b=>!idf.size||Math.abs(b.size-idf.size)<=1).map(b=>{
+    const colHits=[...idf.col].filter(c=>b.col.includes(c)).length;
+    const score=colHits*3 + (idf.size?(b.size===idf.size?2:0):0) + (idf.hab&&b.hab.includes(idf.hab)?2:0);
+    return {b,score,colHits};
+  }).filter(x=>!idf.col.size||x.colHits>0)
     .sort((a,z)=>z.score-a.score || (a.b.col.length-z.b.col.length) || a.b.n.localeCompare(z.b.n));
+  const maxScore=list.length?list[0].score:0;
   v.innerHTML=`<div class="filters">
-    <div class="group"><span class="label">How big?</span><div class="row">${chips("size",[[1,"Tiny"],[2,"Sparrow"],[3,"Robin"],[4,"Crow"],[5,"Larger"]],idf.size)}</div></div>
+    <div class="group"><span class="label">How big? (beak to tail)</span><div class="row">${chips("size",[[1,"Tiny <5\""],[2,"Sparrow 5–7\""],[3,"Robin 8–11\""],[4,"Crow 12–20\""],[5,"Larger 20\"+"]],idf.size)}</div></div>
     <div class="group"><span class="label">Where was it?</span><div class="row">${chips("hab",Object.entries(HAB_TXT),idf.hab)}</div></div>
     <div class="group"><span class="label">Colors you noticed</span><div class="row">${chips("col",Object.keys(COLORS).map(k=>[k,k[0].toUpperCase()+k.slice(1),COLORS[k]]))}</div></div>
-    <div class="row" style="justify-content:space-between"><span class="note">${list.length} possible bird${list.length===1?"":"s"}</span><button class="chip" id="clr">Clear</button></div>
+    <div class="row" style="justify-content:space-between"><span class="note">${list.length} possible bird${list.length===1?"":"s"}${list.length&&maxScore?", best matches first":""}</span><button class="chip" id="clr">Clear</button></div>
   </div>
   <div id="pick"></div>
   <div class="results" style="margin-top:12px">${list.map(({b,score})=>`<button class="result" data-n="${b.n}">
      <span class="mini">${pic(b,true)}</span>
      <span class="rn">${b.n}<br><span class="rs">${SIZE_TXT[b.size].split(",")[0]} · ${b.hab.map(h=>HAB_TXT[h]).join(", ")}</span></span>
-     <span class="score">${idf.col.size?`${score}/${idf.col.size}`:""}</span></button>`).join("")
-     || `<p class="note">No match. Try removing a color or picking a size one step up or down.</p>`}</div>`;
+     <span class="score">${maxScore&&score===maxScore?"Best match":""}</span></button>`).join("")
+     || `<p class="note">No match. Try removing a color.</p>`}</div>`;
   v.querySelectorAll("[data-g]").forEach(c=>c.onclick=()=>{
     const g=c.dataset.g,k=c.dataset.k;
     if(g==="col"){idf.col.has(k)?idf.col.delete(k):idf.col.add(k)}
