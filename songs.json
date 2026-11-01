@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-16",
+ "updated": "2026-11-01",
  "birds": {
   "Turdus migratorius": {
    "song": {
@@ -272,13 +272,13 @@
     "where": "Hog Ranch Road (near Wenas / Cascade Camp), Kittitas County, Washington, United States"
    },
    "call": {
-    "id": "1183802",
+    "id": "1187238",
     "type": "call",
-    "file": "https://xeno-canto.org/1183802/download",
-    "len": "0:18",
-    "who": "Don Profota",
+    "file": "https://xeno-canto.org/1187238/download",
+    "len": "3:24",
+    "who": "Scott Olmstead",
     "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-    "where": "South Bozeman, Gallatin County, Montana, United States"
+    "where": "Incinerator Ridge, Pima County, Arizona, United States"
    }
   },
   "Sitta carolinensis": {
@@ -332,13 +332,13 @@
     "where": "Moss Landing, Monterey County, California, United States"
    },
    "call": {
-    "id": "1175779",
-    "type": "call",
-    "file": "https://xeno-canto.org/1175779/download",
-    "len": "0:49",
-    "who": "Don Profota",
+    "id": "1190325",
+    "type": "call, flight call",
+    "file": "https://xeno-canto.org/1190325/download",
+    "len": "1:39",
+    "who": "Valerie Heemstra",
     "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-    "where": "South Bozeman, Gallatin County, Montana, United States"
+    "where": "Gladstone, Delta County, Michigan, United States"
    }
   },
   "Spinus psaltria": {
@@ -736,13 +736,13 @@
   },
   "Zonotrichia leucophrys": {
    "song": {
-    "id": "1151439",
-    "type": "song",
-    "file": "https://xeno-canto.org/1151439/download",
-    "len": "0:08",
-    "who": "Don Profota",
+    "id": "1188713",
+    "type": "call, song",
+    "file": "https://xeno-canto.org/1188713/download",
+    "len": "0:30",
+    "who": "Scott Crabtree",
     "lic": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-    "where": "South Bozeman, Gallatin County, Montana, United States"
+    "where": "Tucson, Pima County, Arizona, United States"
    },
    "call": {
     "id": "1183609",
